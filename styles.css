@@ -1,5 +1,30 @@
-p { 
-    font-family:'Courier New', Courier, monospace
+body { 
+    color: white;
+    font-family:'Courier New', Courier, monospace;
+}
+pre {
+  color: white;
+  font-family:'Courier New', Courier, monospace;
+
+}
+
+#distro {
+  display: inline-block;
+  vertical-align:top;
+}
+
+#specs {
+  display: inline-block;
+  vertical-align:top;
+}
+
+
+b.lightpink {
+  color: #947b82;
+}
+
+b.magenta {
+	color: #f075b7;
 }
 
 .blink {
@@ -13,10 +38,11 @@ p {
     }
   
     50% {
-      opacity: 0
+      opacity: 0;
     }
   
     100% {
       opacity: 1;
     }
   }
+
