@@ -23,32 +23,7 @@ b.lightpink {
   color: #947b82;
 }
 
-b.magenta {
-	color: #f075b7;
-}
-
-.cursor-blink {
-    border-bottom: 2px solid white;
-    animation: opacity 1s infinite;
-    opacity: 1;
-}
-
-@keyframes opacity {
-    0% {
-      opacity: 1;
-    }
-  
-    50% {
-      opacity: 0;
-    }
-  
-    100% {
-      opacity: 1;
-    }
-  }
-
 .console-input {
-  display: flex;
   span:empty { 
     padding-right:1em;
   }
@@ -59,4 +34,7 @@ b.magenta {
 #text-input {
     border:none;
     outline:none;
+    :empty {
+      display: block;
+    }
 }
