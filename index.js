@@ -1,31 +1,33 @@
+
+
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("click", checkCaretLocation, false);
-const caret_el = document.querySelector("#caret");
+var textEditable = true;
 
-
-function caret_state(state) {
+function caretState(state) {
+    console.log(`Caret visibility was set to ${state}!`)
     document.getElementById("caret").hidden = !state;
-    console.log(`Caret visibility was set to ${!state}!`)
 }
 
-function checkCaretLocation(e){
+function checkCaretLocation(){
     if (document.activeElement.isContentEditable) {
-        caret_state(false);
+        caretState(false);
         console.log("Click was inside editable text field!");
-    } else {
-        caret_state(true);
+    } else if (textEditable) {
+        caretState(true);
         console.log("Click was outside editable text field!");
-
     }
 }
 
 function keyDownTextField(e) {
     var keyCode = e.keyCode;
     if(keyCode==13 && document.activeElement.closest("[contenteditable]")) {
-        const text_field = document.querySelector("#text-input");
-        text_field.setAttribute("contenteditable", false);
+        const textField = document.querySelector("#text-input");
+        textField.setAttribute("contenteditable", false);
+        textEditable = false;
         e.preventDefault();
-        caret_state(false);
+        caretState(false);
+        parseTextInput(textField.innerText);
         console.log("Enter key was pressed while cursor was inside an editable text field!");
     }
     if(keyCode==13 & !(document.activeElement.closest("[contenteditable]"))){
@@ -33,3 +35,27 @@ function keyDownTextField(e) {
     }
 }
 
+function parseTextInput(text){
+    console.log(text);
+    [command, parameter] = text.split(" ");
+    console.log(`Command is ${command}`)
+    console.log(`Parameter is ${parameter}`)
+    cat(`files/${parameter}.html`);
+}
+
+function cat(file){
+    fetch(file)
+        .then((res) => res.text())
+        .then((text) => {
+            var console = document.getElementById("console");
+            console.innerHTML += text;
+        })
+        .catch((e) => console.error(e));
+    fetch("files/load_text.html")
+        .then((res) => res.text())
+        .then((text) => {
+            var console = document.getElementById("console");
+            console.innerHTML += text;
+        })
+        .catch((e) => console.error(e));
+}

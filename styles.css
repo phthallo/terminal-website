@@ -47,7 +47,8 @@ b.magenta {
     }
   }
 
-.terminal {
+.console-input {
+  display: flex;
   span:empty { 
     padding-right:1em;
   }
