@@ -46,3 +46,13 @@ b.magenta {
     }
   }
 
+.emptyprev {
+  span:empty { 
+    padding-right:1em;
+  }
+}
+
+[contenteditable="true"]:active, [contenteditable="true"]:focus {
+    border:none;
+    outline:none;
+}
