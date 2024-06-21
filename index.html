@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel = "stylesheet" href="styles.css">
+    <script type="text/javascript" src="index.js"></script>
     <title>phthallo</title>
   </head>
   <body style = "background-color:#120f19;">
@@ -46,9 +47,11 @@
   
     <p><b>phthallo@hackclub.app:~$ </b>ls</p>
     <p>about_me.md  contacts.md  projects.md</p>
-    <span style = "display:flex;" class = "emptyprev">
+    <span style = "display:flex;" class = "terminal">
         <b>phthallo@hackclub.app:~$&nbsp;</b>
-        <span contenteditable = "true">cat about_me.md</span><span class = "blink"><b>_</b></span>
+        <span id = "text-input" spellcheck="false" contenteditable = "true">
+          cat about_me.md
+        </span><span id = "caret" class = "cursor-blink"></span>
       </span>
   </body>
 

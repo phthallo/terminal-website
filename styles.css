@@ -27,7 +27,8 @@ b.magenta {
 	color: #f075b7;
 }
 
-.blink {
+.cursor-blink {
+    border-bottom: 2px solid white;
     animation: opacity 1s infinite;
     opacity: 1;
 }
@@ -46,13 +47,15 @@ b.magenta {
     }
   }
 
-.emptyprev {
+.terminal {
   span:empty { 
     padding-right:1em;
   }
 }
 
-[contenteditable="true"]:active, [contenteditable="true"]:focus {
+
+
+#text-input {
     border:none;
     outline:none;
 }
