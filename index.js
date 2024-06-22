@@ -2,7 +2,6 @@ document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 
 var consol = document.getElementById("console");
-
 function genTimestamp() {
     time = new Date();
     hours = String(time.getHours()).padStart(2, '0');
@@ -13,11 +12,17 @@ function genTimestamp() {
 
 timeOnLoad = new Date();
 
-setTimeout(function() {
+setInterval(function checkTime() {
     nowTime = new Date();
-    upTime = nowTime - timeOnLoad;
-    console.log(Math.floor(upTime/1000/60));
-}, 60000)
+    upTime = Math.floor((nowTime - timeOnLoad)/60000);
+    if (upTime == 1){
+        document.querySelector("#uptime").innerText = upTime + " min";
+    } else {
+        document.querySelector("#uptime").innerText = upTime + " mins";
+    }
+    return checkTime;
+  }(), 60000);
+
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo@hackclub.app ${genTimestamp()}</b>:~$
@@ -58,13 +63,19 @@ function parseTextInput(text){
     console.log(`Parameter is ${parameter}`)
     if (command=="cat"){
         cat(parameter);
+    } else if (command=="ls") {
+        ls();
+    } else if (command=="rm"){
+        terminalOutput(`rm: cannot perform '${text}': Permission denied<p>`);
+    } else if (command=="sudo") {
+        terminalOutput(`<img src=assets/hk.png width=45%></img><p>`);
     } else {
         terminalOutput(`-bash: ${text}: command not found<p>`);
     }
 }
 
 function cat(file){
-    if ((["about_me", "projects"].includes(file))){
+    if ((["about_me", "contacts",  "projects"].includes(file))){
         fetch(`files/${file}.html`)
         .then((res => res.text()))
         .then((text) => {
@@ -73,6 +84,10 @@ function cat(file){
     } else {
         terminalOutput(`${file}: No such file or directory<p>`)
     }
+}
+
+function ls(){
+    terminalOutput("about_me  contacts  projects<p>");
 }
 
 function terminalOutput(output){
