@@ -15,7 +15,6 @@ function keyDownTextField(e) {
     }
 }
 function parseTextInput(text){
-    console.log(text);
     [command, parameter] = text.split(" ");
     console.log(`Command is ${command}`)
     console.log(`Parameter is ${parameter}`)

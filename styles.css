@@ -19,7 +19,7 @@ pre {
 }
 
 
-b.lightpink {
+b {
   color: #947b82;
 }
 
@@ -29,8 +29,6 @@ b.lightpink {
   }
 }
 
-
-
 #text-input {
     border:none;
     outline:none;
@@ -38,3 +36,39 @@ b.lightpink {
       display: block;
     }
 }
+
+.palette {
+  display: inline-block;
+  height: 2em;
+
+  &.tangrey {
+    background-color: #8e878c;
+  }
+  
+  &.neutralgrey {
+    background-color: #9f94a0;
+  }
+  
+  &.lightgrey {
+    background-color: #bbb8bb;
+  }
+  
+  &.pink {
+    background-color: #dcb8b0;
+  }
+  
+  &.peach {
+    background-color: #e5cab7;
+  }
+  
+  &.blue {
+    background-color: #9bb0cd;
+  }
+  
+  &.lightblue {
+    background-color: #cad5db;
+  }
+  
+}
+
+
