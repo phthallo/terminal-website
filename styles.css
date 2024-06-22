@@ -26,6 +26,8 @@ b {
 .console-input {
   span:empty { 
     padding-right:1em;
+    padding-left:1em;
+
   }
 }
 
@@ -34,6 +36,7 @@ b {
     outline:none;
     :empty {
       display: block;
+      padding-left:1em;
     }
 }
 
