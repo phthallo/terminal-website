@@ -1,5 +1,13 @@
 document.addEventListener("keydown", keyDownTextField, false);
+document.addEventListener("keydown", focusText, false);
+document.addEventListener("load", focusText, false);
+
 var consol = document.getElementById("console");
+
+function focusText(e) {
+    text = consol.querySelector("div:last-child #text-input");
+    text.focus();
+}
 
 function keyDownTextField(e) {
     var keyCode = e.keyCode;
@@ -21,21 +29,19 @@ function parseTextInput(text){
     if (command=="cat"){
         cat(parameter);
     } else {
-        consol.innerHTML += `<div id = "">-bash: ${text}: command not found</div><br>`;
+        consol.innerHTML += `<div id = "">-bash: ${text}: command not found <br> <br> </div>`;
     }
     cat("load_text");
-
 }
 
 function cat(file){
-    if (!(["about_me", "load_text", "projects"].includes(file))){
-        consol.innerHTML += `<div id = "">cat: ${file}: No such file or directory</div><br>`;
-    } else {
+    if ((["about_me", "load_text", "projects"].includes(file))){
         fetch(`files/${file}.html`)
-            .then((res => res.text()))
-            .then((text) => {
-                consol.innerHTML += ('<div id = "">' + text + '</div><br>');
-            });
+        .then((res => res.text()))
+        .then((text) => {
+            consol.innerHTML += ('<div id = "">' + text + '</div>');
+        });
+    } else {
+        consol.innerHTML += `<div id = "">cat: ${file}: No such file or directory <br> <br> </div>`;
     }
-
 }
