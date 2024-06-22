@@ -29,7 +29,7 @@ b {
   }
 }
 
-#text-input {
+.text-input {
     border:none;
     outline:none;
     :empty {

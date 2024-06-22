@@ -1,11 +1,12 @@
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keydown", focusText, false);
-document.addEventListener("load", focusText, false);
+document.addEventListener("onload", focusText, false);
 
 var consol = document.getElementById("console");
 
 function focusText(e) {
-    text = consol.querySelector("div:last-child #text-input");
+    var text = consol.querySelector("div:last-child .text-input");
+    console.log(text);
     text.focus();
 }
 
