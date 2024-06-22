@@ -4,12 +4,20 @@ document.addEventListener("keyup", focusText, false);
 var consol = document.getElementById("console");
 
 function genTimestamp() {
-    currentTime = new Date();
-    hours = String(currentTime.getHours()).padStart(2, '0');
-    minutes = String(currentTime.getMinutes()).padStart(2, '0');
-    seconds = String(currentTime.getSeconds()).padStart(2, '0');
+    time = new Date();
+    hours = String(time.getHours()).padStart(2, '0');
+    minutes = String(time.getMinutes()).padStart(2, '0');
+    seconds = String(time.getSeconds()).padStart(2, '0');
     return (`(${hours}:${minutes}:${seconds})`)
 }
+
+timeOnLoad = new Date();
+
+setTimeout(function() {
+    nowTime = new Date();
+    upTime = nowTime - timeOnLoad;
+    console.log(Math.floor(upTime/1000/60));
+}, 60000)
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo@hackclub.app ${genTimestamp()}</b>:~$
@@ -51,19 +59,27 @@ function parseTextInput(text){
     if (command=="cat"){
         cat(parameter);
     } else {
-        consol.innerHTML += `<div id = "">-bash: ${text}: command not found <br> <br> </div>`;
+        terminalOutput(`-bash: ${text}: command not found<p>`);
     }
-    cat("load_text");
 }
 
 function cat(file){
-    if ((["about_me", "load_text", "projects"].includes(file))){
+    if ((["about_me", "projects"].includes(file))){
         fetch(`files/${file}.html`)
         .then((res => res.text()))
         .then((text) => {
-            consol.innerHTML += ('<div id = "">' + text + '</div>');
+            terminalOutput(text);
         });
     } else {
-        consol.innerHTML += `<div id = "">cat: ${file}: No such file or directory <br> <br> </div>`;
+        terminalOutput(`${file}: No such file or directory<p>`)
     }
+}
+
+function terminalOutput(output){
+    prompt =  `<span class = "console-input">
+        <b>phthallo@hackclub.app ${genTimestamp()}</b>:~$
+        <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>
+    </span>`
+    consol.innerHTML += ('<div id = "">' + output + '</div>');
+    consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
 }
