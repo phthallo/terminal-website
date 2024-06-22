@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "0xProto";
+  src: url(fonts/0xProto/0xProtoNerdFont-Regular.ttf) format("truetype");
+}
+
 body { 
     color: white;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'0xProto', monospace;
 }
 pre {
   color: white;
-  font-family:'Courier New', Courier, monospace;
+  font-family:'0xProto', monospace;
 
 }
 

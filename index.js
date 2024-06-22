@@ -26,13 +26,7 @@ setInterval(function checkTime() {
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo@hackclub.app ${genTimestamp()}</b>:~$
-        <span class = "text-input"  spellcheck="false" contenteditable = "false">ls</span>
-`
-
-consol.querySelector("#l2 .console-input").innerHTML = `
-        <b>phthallo@hackclub.app ${genTimestamp()}</b>:~$
-        <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>
-`
+        <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>`
 
 function focusText(e) {
     var keyCode = e.keyCode;
@@ -46,16 +40,17 @@ function focusText(e) {
 
 function keyDownTextField(e) {
     var keyCode = e.keyCode;
-    if(keyCode==13 && document.activeElement.isContentEditable) {
-        const textField = document.activeElement;
-        textField.setAttribute("contenteditable", false);
-        e.preventDefault();
-        parseTextInput(textField.innerText);
-        console.log("Enter key was pressed while cursor was inside an editable text field!");
-    }
-    if(keyCode==13 & !(document.activeElement.isContentEditable)){
-        console.log("Enter key was pressed when cursor was not inside an editable text field!")
-    }
+    if (keyCode == 13){ 
+        if (!((document.activeElement.textContent).trim())){ // If enter is being pressed when the editable field is empty
+            e.preventDefault();
+        } else if (document.activeElement.isContentEditable) {
+            const textField = document.activeElement;
+            textField.setAttribute("contenteditable", false);
+            e.preventDefault();
+            parseTextInput(textField.innerText);
+            console.log("Enter key was pressed while cursor was inside an editable text field!");
+        }
+        }
 }
 function parseTextInput(text){
     [command, parameter] = text.split(" ");
@@ -69,6 +64,8 @@ function parseTextInput(text){
         terminalOutput(`rm: cannot perform '${text}': Permission denied<p>`);
     } else if (command=="sudo") {
         terminalOutput(`<img src=assets/hk.png width=45%></img><p>`);
+    } else if (command=="help") {
+        help();
     } else {
         terminalOutput(`-bash: ${text}: command not found<p>`);
     }
@@ -87,7 +84,13 @@ function cat(file){
 }
 
 function ls(){
-    terminalOutput("about_me  contacts  projects<p>");
+    terminalOutput("<p>about_me  contacts  projects<p>");
+}
+
+function help(){
+    terminalOutput(`<p>You can use 'ls' to list all files!<p>Some other commands you might want to try are:<p>
+        <b>cat [filename]:</b> read a file. For example, typing 'cat about_me' will read the file 'about_me' to the terminal.
+        <p>There might be more ;)`)
 }
 
 function terminalOutput(output){
