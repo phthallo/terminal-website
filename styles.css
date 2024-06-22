@@ -3,6 +3,16 @@
   src: url(fonts/0xProto/0xProtoNerdFont-Regular.ttf) format("truetype");
 }
 
+:root {
+  --tangrey: #8e878c;
+  --neutralgrey:  #9f94a0;
+  --lightgrey: #bbb8bb; 
+  --pink:  #dcb8b0;
+  --peach:  #e5cab7;
+  --blue:  #9bb0cd;
+  --lightblue:  #cad5db;
+}
+
 body { 
     color: white;
     font-family:'0xProto', monospace;
@@ -23,9 +33,16 @@ pre {
   vertical-align:top;
 }
 
-
 b {
   color: #947b82;
+}
+
+a {
+  color: var(--pink);
+}
+
+.timestamp {
+  color: var(--lightblue);
 }
 
 .console-input {
@@ -50,23 +67,23 @@ b {
   height: 2em;
 
   &.tangrey {
-    background-color: #8e878c;
+    background-color: var(--tangrey);
   }
   
   &.neutralgrey {
-    background-color: #9f94a0;
+    background-color: var(--neutralgrey);
   }
   
   &.lightgrey {
-    background-color: #bbb8bb;
+    background-color: var(--lightgrey);
   }
   
   &.pink {
-    background-color: #dcb8b0;
+    background-color: var(--pink);
   }
   
   &.peach {
-    background-color: #e5cab7;
+    background-color: var(--peach);
   }
   
   &.blue {
