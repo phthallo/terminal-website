@@ -28,14 +28,13 @@ pre {
 
 }
 
+hr {
+  width:50%;
+  margin-left:0;
+}
+
 h4 {
   color: var(--pink);
-}
-p.p-br {
-  margin-bottom: 0.5em;
-}
-note {
-  color: var(--peach);
 }
 
 #distro {
@@ -50,9 +49,23 @@ note {
 
 .box {
   display: inline-block;
-  vertical-align:top;
-
+  vertical-align: top;
 }
+
+.project-wrapper {
+  display: flex; 
+  justify-content: space-between; 
+  width: 50%;
+}
+
+.project-title {
+  width: 30%;
+}
+
+.project-desc {
+  width: 70%;
+}
+
 
 b {
   color: #947b82;
