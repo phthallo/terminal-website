@@ -18,14 +18,24 @@
 }
 
 body { 
-    color: white;
-    font-family:'0xProto', monospace;
+  color: white;
+  font-family:'0xProto', monospace;
 }
 pre {
   color: white;
   font-family:'0xProto', monospace;
   line-height: 0.3em;
 
+}
+
+h4 {
+  color: var(--pink);
+}
+p.p-br {
+  margin-bottom: 0.5em;
+}
+note {
+  color: var(--peach);
 }
 
 #distro {
@@ -38,8 +48,17 @@ pre {
   vertical-align:top;
 }
 
+.box {
+  display: inline-block;
+  vertical-align:top;
+
+}
+
 b {
   color: #947b82;
+  &.normal {
+    color: #ffffff;
+  }
 }
 
 a {

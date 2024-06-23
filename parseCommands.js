@@ -57,7 +57,7 @@ function parseTextInput(tex){
     </span>`;
             consol.innerHTML  = ('<div id = "">' + prompt + '</div>');
             break;
-        case (command=="help"):
+        case "help":
             help();
             break
         default: 
@@ -84,10 +84,16 @@ function ls(){
 }
 
 function help(){
-    terminalOutput(`<p>Some other commands you might want to try are:<p>
-        <b>ls:</b> list all files.<p>
-        <b>cat [filename]:</b> read a file.<p>
-        There might be more ;)`)
+    terminalOutput(`
+        <div class = "box">
+        <b>ls</b><p>
+        <b>cat [filename]</b><p>
+        <b>clear</b></div>
+        <div class = "box">
+        - list all files<p>
+        - read [filename]<p>
+        - clear the terminal<p>
+        </div>`)
 }
 
 function terminalOutput(output){

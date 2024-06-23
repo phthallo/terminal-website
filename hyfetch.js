@@ -36,8 +36,8 @@ colouredAscii = (hyfetch(`
           \`Y$$b.
              \`"Y$b._
                  \`"\""
-    `, [ "#b63c20",
-                "#e69f70", "#FFFFFF", "#c275a3", "#8b185d"]))
+    `, [ "#915346",
+                "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"]))
 
 console.log(colouredAscii.length);
 
