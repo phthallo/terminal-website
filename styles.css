@@ -11,6 +11,10 @@
   --peach:  #e5cab7;
   --blue:  #9bb0cd;
   --lightblue:  #cad5db;
+  --prideorange: #D62800;
+  --pridelightorange: #FF9B56;
+  --pridelightpink: #D462A6;
+  --pridepink: #A40062;
 }
 
 body { 
@@ -20,6 +24,7 @@ body {
 pre {
   color: white;
   font-family:'0xProto', monospace;
+  line-height: 0.3em;
 
 }
 
