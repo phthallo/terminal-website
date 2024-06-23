@@ -1,6 +1,9 @@
+import { sanitise, onpaste } from "./utils.js";
 
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
+document.addEventListener("paste", onpaste, false);
+
 
 var consol = document.getElementById("console");
 
@@ -27,9 +30,11 @@ function keyDownTextField(e) {
         }
         }
 }
-function parseTextInput(text){
-    //text = sanitise(text);
-    [command, parameter] = text.split(" ");
+
+function parseTextInput(tex){
+    var text = sanitise(tex);
+    console.log(text.split(" "));
+    var [command, parameter] = text.split(" ");
     console.log(`Command is ${command}`)
     console.log(`Parameter is ${parameter}`)
     switch(command) {
