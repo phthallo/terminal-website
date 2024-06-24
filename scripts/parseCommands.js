@@ -50,11 +50,7 @@ function parseTextInput(tex){
             terminalOutput(`<img src=assets/hk.png width=45%></img><p>`);
             break;
         case "clear":
-            prompt = `<span class = "console-input">
-        <b>phthallo@hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
-        <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>
-    </span>`;
-            consol.innerHTML  = ('<div id = "">' + prompt + '</div>');
+            terminalOutput("clear", true);
             break;
         case "help":
             help();
@@ -95,11 +91,15 @@ function help(){
         </div><p>there may be more commands ;)`)
 }
 
-function terminalOutput(output){
+function terminalOutput(output, clear=false){
     prompt =  `<span class = "console-input">
-        <b>phthallo@hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
+        <b>phthallo</b>@<b>hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
         <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>
     </span>`
-    consol.innerHTML += ('<div id = "">' + output + '</div>');
-    consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
+    if (clear){
+        consol.innerHTML  = ('<div id = "">' + prompt + '</div>');
+    } else {
+        consol.innerHTML += ('<div id = "">' + output + '</div>');
+        consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
+    }
 }

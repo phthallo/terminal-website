@@ -59,12 +59,42 @@ h4 {
 }
 
 .project-title {
-  width: 30%;
+  max-width: 30%;
+}
+
+
+.post-content {
+  max-width: 50%;
 }
 
 .project-desc {
-  width: 70%;
+  max-width: 70%;
 }
+
+hr {
+  width: 50%;
+}
+@media (width <= 900px) {
+  hr {
+    width: 100%;
+  }
+  .project-wrapper {
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%;
+  }
+
+  .project-title {
+    max-width: 100%;
+  }
+
+  .post-content {
+    max-width: 100%;
+  }
+}
+
+
+
 
 
 b {
