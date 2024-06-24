@@ -1,7 +1,6 @@
 function hyfetch(distroAscii, flagColours){
     colouredLines = []
     lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
-    console.log(lines);
     lengthofEach = Math.floor(lines.length/flagColours.length);
     for (const i in flagColours){
             for (const j in (lines.slice(lengthofEach*(i-1), i*lengthofEach))){
@@ -10,9 +9,7 @@ function hyfetch(distroAscii, flagColours){
             }
         }
     difference  = lines.length - (lengthofEach*flagColours.length);
-    console.log(difference);
     for (let i = (difference+1); i >= 0; i--){
-        console.log(lines[lines.length-1-i]);
         colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
     }
     return colouredLines;
@@ -38,8 +35,6 @@ colouredAscii = (hyfetch(`
                  \`"\""
     `, [ "#915346",
                 "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"]))
-
-console.log(colouredAscii.length);
 
 for (const i in colouredAscii){
     document.querySelector("#distro").innerHTML += colouredAscii[i];

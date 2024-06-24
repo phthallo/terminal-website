@@ -21,3 +21,4 @@ export function onpaste(e){
     }
     document.execCommand("insertHTML", false, text);
 }
+
