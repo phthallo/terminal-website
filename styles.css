@@ -74,10 +74,23 @@ h4 {
 hr {
   width: 50%;
 }
+
+#distro, #specs {
+  margin-top: 20px;
+}
+#specs {
+  margin-left: 20px;
+}
+
 @media (width <= 900px) {
   hr {
     width: 100%;
   }
+  
+  #specs, #distro, .console-input { 
+    font-size:1.15em;
+  }
+
   .project-wrapper {
     display: flex; 
     justify-content: space-between; 
@@ -92,9 +105,6 @@ hr {
     max-width: 100%;
   }
 }
-
-
-
 
 
 b {
@@ -112,11 +122,12 @@ a {
   color: var(--lightblue);
 }
 
-.console-input {
-  span:empty { 
-    padding-right:1em;
-    padding-left:1em;
-
+#console {
+  margin-left:20px;
+  .console-input {
+    span:empty { 
+      padding-right:1em;
+    }  
   }
 }
 

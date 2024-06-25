@@ -10,7 +10,6 @@ function focusText(e) {
     var keyCode = e.keyCode;
     if(keyCode==13){
         var text = consol.querySelector("div:last-child .text-input");
-        console.log(text);
         text.focus();
     }
 }
@@ -25,17 +24,13 @@ function keyDownTextField(e) {
             textField.setAttribute("contenteditable", false);
             e.preventDefault();
             parseTextInput(textField.innerText);
-            console.log("Enter key was pressed while cursor was inside an editable text field!");
         }
         }
 }
 
 function parseTextInput(tex){
     var text = sanitise(tex);
-    console.log(text.split(" "));
     var [command, parameter] = text.split(" ");
-    console.log(`Command is ${command}`)
-    console.log(`Parameter is ${parameter}`)
     switch(command) {
         case "cat":
             cat(parameter);
@@ -47,7 +42,7 @@ function parseTextInput(tex){
             terminalOutput(`rm: cannot perform '${text}': Permission denied<p>`);
             break;
         case "sudo":
-            terminalOutput(`<img src=assets/hk.png width=45%></img><p>`);
+            terminalOutput(`<img class="post-content" src="assets/hk.png"></img>`);
             break;
         case "clear":
             terminalOutput("clear", true);
