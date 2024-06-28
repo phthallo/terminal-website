@@ -56,7 +56,7 @@ function parseTextInput(tex){
 }
 
 function cat(file){
-    if ((["about_me", "contacts",  "projects"].includes(file))){
+    if ((["about_me", "contacts",  "projects", "about_site"].includes(file))){
         fetch(`files/${file}.html`)
         .then((res => res.text()))
         .then((text) => {
@@ -70,20 +70,40 @@ function cat(file){
 }
 
 function ls(){
-    terminalOutput("<p>about_me  contacts  projects<p>");
+    terminalOutput("<p>about_me  contacts  projects  about_site<p>");
 }
 
 function help(){
     terminalOutput(`
-        <div class = "box">
-        <b>ls</b><p>
-        <b>cat [filename]</b><p>
-        <b>clear</b></div>
-        <div class = "box">
-        - list all files<p>
-        - read [filename]<p>
-        - clear the terminal<p>
-        </div><p>there may be more commands ;)`)
+<hr></hr>
+<div class = "project-wrapper">
+    <div class= "project-title">
+        ls
+    </div>
+    <div class = "project-desc">
+        - Lists all files in the current working directory.
+        <p>
+    </div>
+</div>
+<div class = "project-wrapper">
+    <div class= "project-title">
+        cat [filename]
+    </div>
+    <div class = "project-desc">
+        - Outputs the contents of [filename] to the terminal.
+        <p>
+    </div>
+</div>
+<div class = "project-wrapper">
+    <div class= "project-title">
+        clear
+    </div>
+    <div class = "project-desc">
+        - Resets the terminal; clears it of all past commands.
+        <p>
+    </div>
+</div>
+<p>There may be more commands ;)`)
 }
 
 function terminalOutput(output, clear=false){

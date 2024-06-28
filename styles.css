@@ -88,7 +88,7 @@ hr {
   }
   
   #specs, #distro, .console-input { 
-    font-size:1.15em;
+    font-size:1em;
   }
 
   .project-wrapper {
@@ -124,6 +124,7 @@ a {
 
 #console {
   margin-left:20px;
+  margin-bottom:20px;
   .console-input {
     span:empty { 
       padding-right:1em;
