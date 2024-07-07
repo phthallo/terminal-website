@@ -1,5 +1,6 @@
 import { sanitise, onpaste } from "./utils.js";
-
+var inputHistory = []
+var currentPos = 0
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
@@ -23,9 +24,21 @@ function keyDownTextField(e) {
             const textField = document.activeElement;
             textField.setAttribute("contenteditable", false);
             e.preventDefault();
+            currentPos = 0
+            inputHistory.push(textField.innerText);
             parseTextInput(textField.innerText);
         }
-        }
+    } 
+    latestTextField = document.querySelector("#console > div:last-child > span");
+    if (keyCode == 38){
+        currentPos --
+        latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+    } 
+    if (keyCode == 40){
+        currentPos ++
+        latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+    }
+
 }
 
 function parseTextInput(tex){
