@@ -1,5 +1,4 @@
-var currentRoom = ""
-var gameStarted = false
+var currentRoom = "outside"
 console.log(`
             _.--._
             _|__|_
@@ -33,43 +32,64 @@ _|__|/__________________________\|__|_
 '----'----------------------------'----'
 *vworp vworp*
 A TARDIS has materialised!
-Do you want to play a game?`)
+Do you want to play a game? (yes())`)
 
-Object.defineProperty(window, 'yes', {
-    get: function () {
-        console.log("What do you want to do next? look (inside/outside)")
-        gameStarted = true
-    }
-})
+function yes(){
+    console.log("What do you want to do next? go (inside()/outside())")
+}
 
-if (gameStarted == true){
-        Object.defineProperty(window, 'inside', {
-        get: async function () {
+function inside(){
+    switch(currentRoom){
+        case("outside"):
             console.log("You open the door. It's dark inside, but there's a faint light in the middle.")
-            console.log("What do you want to do next? look (closer/outside)")
-            let currentRoom = await new Promise(function(resolve) {
-                resolve("mainConsole");
-            });
-        }
-    });
-    Object.defineProperty(window, 'outside', {
-        get: async function () {
-            console.log("You look away from the TARDIS. Nothing but inconspicous grass.")
-            console.log("When you look back, the TARDIS has disappeared.")
-            let currentRoom = await new Promise(function(resolve) {
-                resolve("gameOver");
-            });
-        }
-    });
+            console.log("What do you want to do next? look (closer()/outside())")
+            currentRoom = "consoleRoom"
+            break;
+        case("TARDISMain"):
+            console.log("You cautiously approach one of the entrances in the room. As you enter, the lights turn on.")
+            console.log("What do you want to do next? look (inside())")
+            currentRoom = "TARDISHallway"
+            break;
+        case("TARDISHallway"):
+            console.log("The lights pulse gently as you pass through the entrance of the hallway. You can see two doors to your right and left.")
+            console.log("What do you want to do next? try the door on the (left() / right())")
+            break;
+    }
+}
 
-    
+function left(){
+    switch(currentRoom){
+        case("TARDISHallway"):
+            console.log("It's locked.")
+            inside()
+            break;
     }
-    if (currentRoom == "mainConsole"){
-        console.log("You are inside")
-        Object.defineProperty(window, 'closer', {
-            get: async function () {
-                console.log("You walk inside and move closer to the main console. There's a faint whirring sound.")
-                currentRoom = "con"
-            }
-        })
+}
+
+function outside(){
+    switch(currentRoom){
+        case("consoleRoom"):
+        case("outside"):
+            console.log("You look away from the TARDIS. When you look back, it's gone.")
+            currentRoom = "gameOver"
+            break;
+}
+}
+
+function closer(){
+    switch(currentRoom){
+        case("consoleRoom"):
+            console.log("As you approach the console, the lights flash. Suddenly, the door shuts behind you! ")
+            console.log("What do you want to do next? look (inside()) / inspect()")
+            currentRoom = "TARDISMain"
+            break;
     }
+}
+
+function inspect(){
+    switch(currentRoom){
+        case("TARDISMain"):
+            console.log("You look carefully at the controls in front of you. Two things stand out: a lever and a button.")
+            console.log("What do you want to do next? use (lever()) / button())")
+    }
+}
