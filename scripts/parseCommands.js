@@ -1,6 +1,6 @@
 import { sanitise, onpaste } from "./utils.js";
-var inputHistory = []
-var currentPos = 0
+var inputHistory = [""]
+var currentPos = -1
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
@@ -24,19 +24,30 @@ function keyDownTextField(e) {
             const textField = document.activeElement;
             textField.setAttribute("contenteditable", false);
             e.preventDefault();
-            currentPos = 0
-            inputHistory.push(textField.innerText);
+            currentPos = -1
+            inputHistory.splice(inputHistory.length-1, 0, textField.innerText)
             parseTextInput(textField.innerText);
         }
     } 
-    latestTextField = document.querySelector("#console > div:last-child > span");
+    var latestTextField = consol.querySelector("div:last-child .text-input");
     if (keyCode == 38){
+        e.preventDefault();
         currentPos --
-        latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+        console.log(inputHistory.length + currentPos)
+        if (typeof inputHistory[inputHistory.length + currentPos] !== "undefined"){
+            latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+        } else {
+            currentPos ++
+        }
     } 
     if (keyCode == 40){
+        e.preventDefault();
         currentPos ++
-        latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+        if (typeof inputHistory[inputHistory.length + currentPos] !== "undefined"){
+            latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
+        } else {
+            currentPos --
+}
     }
 
 }
