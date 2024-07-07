@@ -53,7 +53,7 @@ function explore(){
             break;
         case("TARDISHallway"):
             console.log("The lights pulse gently as you pass through the entrance of the hallway. You can see two doors to your right and left.")
-            console.log("What do you want to do next? try the door on the (left() / right()) / exit())")
+            console.log("What do you want to do next? try the door on the (left() / right() / exit())")
             break;
         case("TARDISLibrary"):
             console.log("You enter the room.")
