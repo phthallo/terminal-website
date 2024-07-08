@@ -45,7 +45,7 @@ let specs = `
 --><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
 --><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>`
 
-export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"],  replace=true} = {}){
+export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"], initial=false,  replace=true} = {}){
     let colouredLines = []
     let lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
     let lengthofEach = Math.floor(lines.length/flagColours.length);
@@ -59,10 +59,12 @@ export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", 
     for (let i = (difference+2); i >= 0; i--){
         colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
     }
-    if (replace){
+    if (initial){
       document.querySelectorAll(".distro").forEach(x => x.innerHTML = colouredLines.join(""));
       document.querySelectorAll(".specs").forEach(x => x.innerHTML = specs);
-      renderFact()
+      renderFact();
+    } else if (replace) {
+      document.querySelectorAll(".distro").forEach(x => x.innerHTML = colouredLines.join(""));
     } else {
         return [colouredLines, specs];
     }

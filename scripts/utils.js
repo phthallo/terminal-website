@@ -22,3 +22,12 @@ export function onpaste(e){
     document.execCommand("insertHTML", false, text);
 }
 
+
+export function asciiArt(ascii){
+  let formattedLines = []
+  let lines = ascii.split("\n");
+  for (let i = 0; i < lines.length; i ++){
+    formattedLines.push(`<pre>${lines[i]}</pre>`);
+  }
+  return formattedLines.join("");
+}

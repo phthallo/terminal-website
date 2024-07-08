@@ -1,4 +1,4 @@
-import { sanitise, onpaste } from "./utils.js";
+import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime } from "./index.js";
 var inputHistory = [""]
@@ -102,12 +102,20 @@ function parseTextInput(tex){
                 '#536eac',
                 '#55305a'
             ]});
-            renderFact();
-            checkTime();
             prideActivated = true;
-            terminalOutput("Happy Pride!<p>");
+            terminalOutput("<p>Happy Pride!</p>");
             break;
-
+        case "rawr":
+            let dino = `
+               __
+              / _)
+     _.----._/ /
+    /         /
+ __/ (  | (  |
+/__.-'|_|--|_| 
+`
+        terminalOutput(asciiArt(dino)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.<p>');
+        break
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }

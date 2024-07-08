@@ -6,7 +6,7 @@ window.setInterval(function() {
     elem.scrollTop = elem.scrollHeight;
   }, 2000);
 
-let x = hyfetch();
+let x = hyfetch({initial: true, replace: false});
 
 export function genTimestamp() {
     let time = new Date();
