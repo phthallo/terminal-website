@@ -11,32 +11,8 @@
   </head>
   <body style = "background-color:#120f19;">
     <div>
-        <div id = "distro"></div>
-        <div id = "specs">
-          <b>phthallo</b>@<b>hackclub.app</b>
-          <br>---------------------<br>
-          <b>OS: </b>Debian GNU/Linux 12.5 (bookworm) x86_64<br>
-          <b>Host: </b>Virtual Machine Hyper-V UEFI Release v4.0<br>
-          <b>Kernel: </b>6.1.0-21-amd64<br>
-          <b>Uptime: </b><span id = "uptime">0 mins</span><br>
-          <b>Resolution: </b>1920x1080<br>
-          <b>DE: </b>GNOME 43.9 (wayland)<br>
-          <b>VIM: </b>Mutter<br>
-          <b>WPI Theme: </b>Adwaita<br>
-          <b>Theme: </b>Adwaita [GTK2/3]<br>
-          <b>Terminal: </b>gnome-terminal<br>
-          <b>CPU: </b>Intel i5-10210U (1) @ 2.111GHz<p>
-          
-          <b>Fun fact! </b><span id = "funfact"></span><p>
-          <b>Need help? </b> Type 'help' to get started!<p>
-            <span class = "palette tangrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette neutralgrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette lightgrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette pink">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette peach">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
-          --><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>
-        </div>
+        <div class = "distro"></div>
+        <div class = "specs"></div>
         </div>
       </div>
   </div>
@@ -49,12 +25,10 @@
     </div>
   </div>
   </body>
-  <script type="text/javascript" src="scripts/index.js"></script>
+  <script type="module" src="scripts/index.js"></script>
   <script type="text/javascript" src="scripts/adventure.js"></script>
-  <script type="text/javascript" src="scripts/hyfetch.js"></script>
   <script type="text/javascript" src="scripts/code.js"></script>
+  <script type="module" src="scripts/hyfetch.js"></script>
   <script type="module" src="scripts/utils.js"></script>
   <script type="module" src="scripts/parseCommands.js"></script>
-
-
 </html>

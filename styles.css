@@ -37,12 +37,12 @@ h4 {
   color: var(--pink);
 }
 
-#distro {
+.distro {
   display: inline-block;
   vertical-align:top;
 }
 
-#specs {
+.specs {
   display: inline-block;
   vertical-align:top;
 }
@@ -75,10 +75,10 @@ hr {
   width: 50%;
 }
 
-#distro, #specs {
+.distro, .specs {
   margin-top: 20px;
 }
-#specs {
+.specs {
   margin-left: 20px;
 }
 
@@ -87,7 +87,7 @@ hr {
     width: 100%;
   }
   
-  #specs, #distro, .console-input { 
+  .specs, .distro, .console-input { 
     font-size:1em;
   }
 

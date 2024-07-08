@@ -1,21 +1,4 @@
-function hyfetch(distroAscii, flagColours){
-    colouredLines = []
-    lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
-    lengthofEach = Math.floor(lines.length/flagColours.length);
-    for (let i = 0; i < flagColours.length; i++){
-            for (const j in (lines.slice(lengthofEach*(i-1), i*lengthofEach))){
-                nextLine = (lines.slice(lengthofEach*(i-1), i*lengthofEach)[j]);
-                colouredLines.push(`<pre style = "color: ${flagColours[i-1]}">${nextLine}</pre>`);
-            }
-        }
-    difference  = lines.length - (lengthofEach*flagColours.length);
-    for (let i = (difference+2); i >= 0; i--){
-        colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
-    }
-    return colouredLines;
-    }
-
-colouredAscii = (hyfetch(`
+let distro = `
           _,met$$$$$gg.
        ,g$$$$$$$$$$$$$$$P.
      ,g$$P"        "\""Y$$.".
@@ -33,10 +16,52 @@ colouredAscii = (hyfetch(`
           \`Y$$b.
              \`"Y$b._
                  \`"\""
-    `, ["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"]))
+`
 
-for (const i in colouredAscii){
-    document.querySelector("#distro").innerHTML += colouredAscii[i];
+export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"],  replace=true} = {}){
+    console.log(distroAscii, flagColours, replace)
+    let colouredLines = []
+    let lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
+    let lengthofEach = Math.floor(lines.length/flagColours.length);
+    for (let i = 0; i < flagColours.length; i++){
+            for (const j in (lines.slice(lengthofEach*(i-1), i*lengthofEach))){
+                let nextLine = (lines.slice(lengthofEach*(i-1), i*lengthofEach)[j]);
+                colouredLines.push(`<pre style = "color: ${flagColours[i-1]}">${nextLine}</pre>`);
+            }
+        }
+    let difference  = lines.length - (lengthofEach*flagColours.length);
+    for (let i = (difference+2); i >= 0; i--){
+        colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
+    }
+    if (replace){
+        for (const i in colouredLines){
+            document.querySelector(".distro").innerHTML += colouredLines[i];
+            document.querySelector(".specs").innerHTML = `
+          <b>phthallo</b>@<b>hackclub.app</b>
+          <br>---------------------<br>
+          <b>OS: </b>Debian GNU/Linux 12.5 (bookworm) x86_64<br>
+          <b>Host: </b>Virtual Machine Hyper-V UEFI Release v4.0<br>
+          <b>Kernel: </b>6.1.0-21-amd64<br>
+          <b>Uptime: </b><span id = "uptime">0 mins</span><br>
+          <b>Resolution: </b>1920x1080<br>
+          <b>DE: </b>GNOME 43.9 (wayland)<br>
+          <b>VIM: </b>Mutter<br>
+          <b>WPI Theme: </b>Adwaita<br>
+          <b>Theme: </b>Adwaita [GTK2/3]<br>
+          <b>Terminal: </b>gnome-terminal<br>
+          <b>CPU: </b>Intel i5-10210U (1) @ 2.111GHz<p>
+          
+          <b>Fun fact! </b><span id = "funfact"></span><p>
+          <b>Need help? </b> Type 'help' to get started!<p>
+            <span class = "palette tangrey">&nbsp;&nbsp;&nbsp;</span><!--
+          --><span class = "palette neutralgrey">&nbsp;&nbsp;&nbsp;</span><!--
+          --><span class = "palette lightgrey">&nbsp;&nbsp;&nbsp;</span><!--
+          --><span class = "palette pink">&nbsp;&nbsp;&nbsp;</span><!--
+          --><span class = "palette peach">&nbsp;&nbsp;&nbsp;</span><!--
+          --><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
+          --><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>`
+        }
+    } else {
+        return colouredLines;
+    }
 }
-
-

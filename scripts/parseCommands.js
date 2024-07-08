@@ -1,4 +1,6 @@
 import { sanitise, onpaste } from "./utils.js";
+import { hyfetch } from "./hyfetch.js";
+import { genTimestamp } from "./index.js";
 var inputHistory = [""]
 var currentPos = -1
 document.addEventListener("keydown", keyDownTextField, false);
@@ -73,7 +75,11 @@ function parseTextInput(tex){
             break;
         case "help":
             help();
-            break
+            break;
+        case "hyfetch":
+            let normal = hyfetch({replace: false});
+            terminalOutput('<div class = "distro">'+normal.join("")+'</div>');
+            break;
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }
