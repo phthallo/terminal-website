@@ -1,4 +1,4 @@
-import { funFact } from "./index.js";
+import { funFact, renderFact } from "./index.js"
 let distro = `
           _,met$$$$$gg.
        ,g$$$$$$$$$$$$$$$P.
@@ -19,8 +19,7 @@ let distro = `
                  \`"\""
 `
 
-let fact = funFact();
-console.log(fact);
+
 let specs = ` 
 <b>phthallo</b>@<b>hackclub.app</b>
 <br>---------------------<br>
@@ -36,7 +35,7 @@ let specs = `
 <b>Terminal: </b>gnome-terminal<br>
 <b>CPU: </b>Intel i5-10210U (1) @ 2.111GHz<p>
 
-<b>Fun fact! </b><span class = "funfact">${fact}</span><p>
+<b>Fun fact! </b><span class = "funfact"></span><p>
 <b>Need help? </b> Type 'help' to get started!<p>
   <span class = "palette tangrey">&nbsp;&nbsp;&nbsp;</span><!--
 --><span class = "palette neutralgrey">&nbsp;&nbsp;&nbsp;</span><!--
@@ -66,6 +65,8 @@ export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", 
             document.querySelector(".distro").innerHTML += colouredLines[i];
             document.querySelector(".specs").innerHTML = specs 
                  }
+        renderFact();
+
     } else {
         return [colouredLines, specs];
     }

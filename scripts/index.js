@@ -29,20 +29,19 @@ setInterval(function checkTime() {
     return checkTime;
   }(), 60000);
 
-export function funFact() {
-    return fetch(`assets/facts.html`)
-    .then((res => res.text()))
-    .then((text) => {
-        let allFacts = (text.split("\r\n"));
-        let nodes = document.querySelectorAll(".funfact");
-        nodes[nodes.length-1].innerHTML = allFacts[Math.floor(Math.random()*allFacts.length)]
-        text = allFacts[Math.floor(Math.random()*allFacts.length)];
-});}
 
+export async function funFact() {
+    const res = await fetch('assets/facts.html', {});
+    const text = await res.text();
+    return await (text.split("\r\n"))[Math.floor(Math.random()* (text.split("\r\n")).length)];
+}
 
-funFact()
-    .then(fact=>console.log(fact))
-    .then(finalFact => console.log(finalFact));
+export async function renderFact() {
+    let fact = await (funFact());
+    let nodes = document.querySelectorAll(".funfact");
+    nodes[nodes.length-1].innerHTML = fact    
+}
+
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo</b>@<b>hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
