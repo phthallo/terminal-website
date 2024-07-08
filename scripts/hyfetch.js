@@ -1,3 +1,4 @@
+import { funFact } from "./index.js";
 let distro = `
           _,met$$$$$gg.
        ,g$$$$$$$$$$$$$$$P.
@@ -18,8 +19,34 @@ let distro = `
                  \`"\""
 `
 
+let fact = funFact();
+console.log(fact);
+let specs = ` 
+<b>phthallo</b>@<b>hackclub.app</b>
+<br>---------------------<br>
+<b>OS: </b>Debian GNU/Linux 12.5 (bookworm) x86_64<br>
+<b>Host: </b>Virtual Machine Hyper-V UEFI Release v4.0<br>
+<b>Kernel: </b>6.1.0-21-amd64<br>
+<b>Uptime: </b><span class = "uptime">0 mins</span><br>
+<b>Resolution: </b>1920x1080<br>
+<b>DE: </b>GNOME 43.9 (wayland)<br>
+<b>VIM: </b>Mutter<br>
+<b>WPI Theme: </b>Adwaita<br>
+<b>Theme: </b>Adwaita [GTK2/3]<br>
+<b>Terminal: </b>gnome-terminal<br>
+<b>CPU: </b>Intel i5-10210U (1) @ 2.111GHz<p>
+
+<b>Fun fact! </b><span class = "funfact">${fact}</span><p>
+<b>Need help? </b> Type 'help' to get started!<p>
+  <span class = "palette tangrey">&nbsp;&nbsp;&nbsp;</span><!--
+--><span class = "palette neutralgrey">&nbsp;&nbsp;&nbsp;</span><!--
+--><span class = "palette lightgrey">&nbsp;&nbsp;&nbsp;</span><!--
+--><span class = "palette pink">&nbsp;&nbsp;&nbsp;</span><!--
+--><span class = "palette peach">&nbsp;&nbsp;&nbsp;</span><!--
+--><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
+--><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>`
+
 export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"],  replace=true} = {}){
-    console.log(distroAscii, flagColours, replace)
     let colouredLines = []
     let lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
     let lengthofEach = Math.floor(lines.length/flagColours.length);
@@ -35,33 +62,11 @@ export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", 
     }
     if (replace){
         for (const i in colouredLines){
+            //document.querySelector(".distro").innerHTML = "";
             document.querySelector(".distro").innerHTML += colouredLines[i];
-            document.querySelector(".specs").innerHTML = `
-          <b>phthallo</b>@<b>hackclub.app</b>
-          <br>---------------------<br>
-          <b>OS: </b>Debian GNU/Linux 12.5 (bookworm) x86_64<br>
-          <b>Host: </b>Virtual Machine Hyper-V UEFI Release v4.0<br>
-          <b>Kernel: </b>6.1.0-21-amd64<br>
-          <b>Uptime: </b><span id = "uptime">0 mins</span><br>
-          <b>Resolution: </b>1920x1080<br>
-          <b>DE: </b>GNOME 43.9 (wayland)<br>
-          <b>VIM: </b>Mutter<br>
-          <b>WPI Theme: </b>Adwaita<br>
-          <b>Theme: </b>Adwaita [GTK2/3]<br>
-          <b>Terminal: </b>gnome-terminal<br>
-          <b>CPU: </b>Intel i5-10210U (1) @ 2.111GHz<p>
-          
-          <b>Fun fact! </b><span id = "funfact"></span><p>
-          <b>Need help? </b> Type 'help' to get started!<p>
-            <span class = "palette tangrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette neutralgrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette lightgrey">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette pink">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette peach">&nbsp;&nbsp;&nbsp;</span><!--
-          --><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
-          --><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>`
-        }
+            document.querySelector(".specs").innerHTML = specs 
+                 }
     } else {
-        return colouredLines;
+        return [colouredLines, specs];
     }
 }

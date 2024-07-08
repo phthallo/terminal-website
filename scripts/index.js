@@ -4,7 +4,7 @@ var consol = document.getElementById("console");
 window.setInterval(function() {
     var elem = consol;
     elem.scrollTop = elem.scrollHeight;
-  }, 5000);
+  }, 2000);
 
 let x = hyfetch();
 
@@ -22,22 +22,27 @@ setInterval(function checkTime() {
     let nowTime = new Date();
     let upTime = Math.floor((nowTime - timeOnLoad)/60000);
     if (upTime == 1){
-        document.querySelector("#uptime").innerText = upTime + " min";
+        document.querySelectorAll(".uptime").innerText = upTime + " min";
     } else {
-        document.querySelector("#uptime").innerText = upTime + " mins";
+        document.querySelectorAll(".uptime").innerText = upTime + " mins";
     }
     return checkTime;
   }(), 60000);
 
-function funFact() {
-    fetch(`assets/facts.html`)
+export function funFact() {
+    return fetch(`assets/facts.html`)
     .then((res => res.text()))
     .then((text) => {
         let allFacts = (text.split("\r\n"));
-        document.querySelector("#funfact").innerHTML = allFacts[Math.floor(Math.random()*allFacts.length)]
+        let nodes = document.querySelectorAll(".funfact");
+        nodes[nodes.length-1].innerHTML = allFacts[Math.floor(Math.random()*allFacts.length)]
+        text = allFacts[Math.floor(Math.random()*allFacts.length)];
 });}
 
-funFact();
+
+funFact()
+    .then(fact=>console.log(fact))
+    .then(finalFact => console.log(finalFact));
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo</b>@<b>hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>

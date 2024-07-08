@@ -35,7 +35,6 @@ function keyDownTextField(e) {
     if (keyCode == 38){
         e.preventDefault();
         currentPos --
-        console.log(inputHistory.length + currentPos)
         if (typeof inputHistory[inputHistory.length + currentPos] !== "undefined"){
             latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
         } else {
@@ -78,7 +77,7 @@ function parseTextInput(tex){
             break;
         case "hyfetch":
             let normal = hyfetch({replace: false});
-            terminalOutput('<div class = "distro">'+normal.join("")+'</div>');
+            terminalOutput(`<div class = "distro">${(normal[0]).join("")}</div><div class = "specs">${normal[1]}`);
             break;
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
