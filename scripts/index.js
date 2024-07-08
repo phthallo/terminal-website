@@ -17,17 +17,17 @@ export function genTimestamp() {
 }
 
 let timeOnLoad = new Date();
-
-setInterval(function checkTime() {
+export function checkTime() {
     let nowTime = new Date();
     let upTime = Math.floor((nowTime - timeOnLoad)/60000);
     if (upTime == 1){
-        document.querySelectorAll(".uptime").innerText = upTime + " min";
+        document.querySelectorAll(".uptime").forEach(x => x.innerText = upTime + " min");
     } else {
-        document.querySelectorAll(".uptime").innerText = upTime + " mins";
+        document.querySelectorAll(".uptime").forEach(x => x.innerText = upTime + " mins")
     }
     return checkTime;
-  }(), 60000);
+}
+setInterval(checkTime(), 60000);
 
 
 export async function funFact() {

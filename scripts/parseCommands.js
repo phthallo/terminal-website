@@ -1,8 +1,9 @@
 import { sanitise, onpaste } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
-import { genTimestamp, renderFact } from "./index.js";
+import { genTimestamp, renderFact, checkTime } from "./index.js";
 var inputHistory = [""]
 var currentPos = -1
+var prideActivated = false
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
@@ -76,11 +77,37 @@ function parseTextInput(tex){
             help();
             break;
         case "hyfetch":
-            let normal = hyfetch({replace: false});
-            terminalOutput(`<div class = "distro">${(normal[0]).join("")}</div><div class = "specs">${normal[1]}`);
+            if (!(prideActivated)){
+                var themed = hyfetch({replace: false});
+            } else {
+                var themed = hyfetch({flagColours:[
+                    '#9b4b4b',
+                    '#ac8453',
+                    '#aca653',
+                    '#2b5a37',
+                    '#536eac',
+                    '#55305a'
+                ], replace: false});
+            }
+            terminalOutput(`<div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}`)
             renderFact();
-              
+            checkTime();
             break;
+        case "pride":
+            hyfetch({flagColours:[
+                '#9b4b4b',
+                '#ac8453',
+                '#aca653',
+                '#2b5a37',
+                '#536eac',
+                '#55305a'
+            ]});
+            renderFact();
+            checkTime();
+            prideActivated = true;
+            terminalOutput("Happy Pride!<p>");
+            break;
+
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }

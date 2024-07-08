@@ -37,6 +37,7 @@ h4 {
   color: var(--pink);
 }
 
+
 .distro {
   display: inline-block;
   vertical-align:top;
@@ -122,7 +123,7 @@ a {
   color: var(--lightblue);
 }
 
-#console {
+#console, #initial {
   margin-left:20px;
   margin-bottom:20px;
   .console-input {

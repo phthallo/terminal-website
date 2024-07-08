@@ -60,13 +60,9 @@ export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", 
         colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
     }
     if (replace){
-        for (const i in colouredLines){
-            //document.querySelector(".distro").innerHTML = "";
-            document.querySelector(".distro").innerHTML += colouredLines[i];
-            document.querySelector(".specs").innerHTML = specs 
-                 }
-        renderFact();
-
+      document.querySelectorAll(".distro").forEach(x => x.innerHTML = colouredLines.join(""));
+      document.querySelectorAll(".specs").forEach(x => x.innerHTML = specs);
+      renderFact()
     } else {
         return [colouredLines, specs];
     }
