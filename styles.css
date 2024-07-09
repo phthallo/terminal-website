@@ -1,3 +1,5 @@
+/* || GENERAL STYLES */
+
 @font-face {
   font-family: "0xProto";
   src: url(fonts/0xProto/0xProtoNerdFont-Regular.ttf) format("truetype");
@@ -21,6 +23,18 @@ body {
   color: white;
   font-family:'0xProto', monospace;
 }
+
+b {
+  color: #947b82;
+  &.normal {
+    color: #ffffff;
+  }
+}
+
+h4, a {
+  color: var(--pink);
+}
+
 pre {
   color: white;
   font-family:'0xProto', monospace;
@@ -32,20 +46,50 @@ hr {
   margin-left:0;
 }
 
-h4 {
-  color: var(--pink);
+/* || ELEMENT STYLES */
+
+
+#initial {
+  .specs {
+    margin-left: 1em;
+  }
+  .distro {
+    margin-right: 1em;
+  }
 }
 
-
-.distro {
-  display: inline-block;
+.hyfetch {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
   vertical-align:top;
-  margin-right: 1em;
+  margin-top: 2em;
+  .specs {
+    margin-left: 1em;
+  }
+  .distro {
+    margin-right: 1em;
+  }
+  @media (width <= 600px) {
+    flex-direction: column;
+    .specs {
+      margin-left: 0em;
+    }
+  }
 }
 
-.specs {
-  display: inline-block;
-  vertical-align:top;
+#console {
+  margin-left:1em;
+  margin-bottom:1em;
+  .distro {
+    margin-left: -1em;
+    margin-right: 1em;
+  }
+  .console-input {
+    span:empty { 
+      padding-right:1em;
+    }  
+  }
 }
 
 .box {
@@ -57,29 +101,33 @@ h4 {
   display: flex; 
   justify-content: space-between; 
   width: 50%;
+  .project-title {
+    max-width: 30%
+  }
+  .project-desc {
+    max-width: 70%;
+  }
 }
-
-.project-title {
-  max-width: 30%;
-}
-
 
 .post-content {
   max-width: 50%;
 }
 
-.project-desc {
-  max-width: 70%;
+
+.timestamp {
+  color: var(--lightblue);
 }
 
-hr {
-  width: 50%;
+.text-input {
+  border:none;
+  outline:none;
+  :empty {
+    display: block;
+    padding-left:1em;
+  }
 }
 
-.distro, .specs {
-  margin-top: 2em;
-}
-
+/* || MOBILE STYLES */
 
 @media (width <= 900px) {
   hr {
@@ -92,61 +140,12 @@ hr {
     width: 100%;
   }
 
-  .project-title {
+  .project-title, .post-content {
     max-width: 100%;
   }
 
-  .post-content {
-    max-width: 100%;
-  }
 }
 
-
-b {
-  color: #947b82;
-  &.normal {
-    color: #ffffff;
-  }
-}
-
-a {
-  color: var(--pink);
-}
-
-.timestamp {
-  color: var(--lightblue);
-}
-
-
-#initial {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1em;
-  .specs {
-    margin-left: 1em;
-  }
-  @media (width <= 600px) {
-    flex-direction: column;
-  }
-}
-#console {
-  margin-left:1em;
-  margin-bottom:1em;
-  .console-input {
-    span:empty { 
-      padding-right:1em;
-    }  
-  }
-}
-
-.text-input {
-    border:none;
-    outline:none;
-    :empty {
-      display: block;
-      padding-left:1em;
-    }
-}
 
 .palette {
   display: inline-block;

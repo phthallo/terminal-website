@@ -1,4 +1,4 @@
-import { funFact, renderFact } from "./index.js"
+import { renderFact } from "./index.js"
 let distro = `
           _,met$$$$$gg.
        ,g$$$$$$$$$$$$$$$P.

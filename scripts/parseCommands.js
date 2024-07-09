@@ -89,7 +89,7 @@ function parseTextInput(tex){
                     '#55305a'
                 ], replace: false});
             }
-            terminalOutput(`<div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}`)
+            terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
             renderFact();
             checkTime();
             break;
@@ -147,7 +147,7 @@ function help(){
         ls
     </div>
     <div class = "project-desc">
-        - Lists all files in the current working directory.
+        Lists all files in the current working directory.
         <p>
     </div>
 </div>
@@ -156,7 +156,7 @@ function help(){
         cat [filename]
     </div>
     <div class = "project-desc">
-        - Outputs the contents of [filename] to the terminal.
+        Outputs the contents of [filename] to the terminal.
         <p>
     </div>
 </div>
@@ -165,7 +165,7 @@ function help(){
         clear
     </div>
     <div class = "project-desc">
-        - Resets the terminal; clears it of all past commands.
+        Resets the terminal; clears it of all past commands.
         <p>
     </div>
 </div>
