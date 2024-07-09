@@ -114,8 +114,11 @@ function parseTextInput(tex){
  __/ (  | (  |
 /__.-'|_|--|_| 
 `
-        terminalOutput(asciiArt(dino)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.<p>');
-        break
+            terminalOutput(asciiArt(dino)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.<p>');
+            break;
+        case "pyflagoras":
+            pyflagoras(parameter);
+            break;
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }
@@ -140,36 +143,38 @@ function ls(){
 }
 
 function help(){
-    terminalOutput(`
-<hr></hr>
-<div class = "project-wrapper">
-    <div class= "project-title">
-        ls
-    </div>
-    <div class = "project-desc">
-        Lists all files in the current working directory.
-        <p>
-    </div>
-</div>
-<div class = "project-wrapper">
-    <div class= "project-title">
-        cat [filename]
-    </div>
-    <div class = "project-desc">
-        Outputs the contents of [filename] to the terminal.
-        <p>
-    </div>
-</div>
-<div class = "project-wrapper">
-    <div class= "project-title">
-        clear
-    </div>
-    <div class = "project-desc">
-        Resets the terminal; clears it of all past commands.
-        <p>
-    </div>
-</div>
-<p>There may be more commands ;)`)
+    let commands = {
+        "ls": "Lists all files in the current working directory",
+        "cat [file]": "Outputs the contents of [file] to the terminal",
+        "clear": "Resets the terminal; clears it of all past commands",
+        "hyfetch": "Prints system information [<a href = 'https://github.com/hykilpikonna/hyfetch'>neofetch</a> with pride flags <3]"
+    }
+    let paired = []
+    console.log(Object.values(commands))
+    for (let i = 0; i < Object.keys(commands).length; i++){
+        paired.push(`
+        <div class = "project-wrapper">
+            <div class= "project-title">
+            ${Object.keys(commands)[i]}
+            </div>
+            <div class = "project-desc">
+                ${Object.values(commands)[i]}
+                <p>
+            </div>
+        </div>`)
+    }
+    console.log(paired)
+    terminalOutput(`<hr></hr> ${paired.join("")} <p>There may be more commands ;)`);
+}
+
+function pyflagoras(parameter){
+    if (!(parameter)){
+        terminalOutput(`
+usage: pyflagoras [-h] [-f FLAG] [-n NAME] [--verbose] [--svg] [--version] [-l] image<br>
+pyflagoras: error: the following arguments are required: image<p>`)
+    } else {
+        terminalOutput("Pyflagoras won't work here D: You can still check it out on <a href = 'https://github.com/phthallo/pyflagoras'>GitHub</a>!<p>")
+    }
 }
 
 function terminalOutput(output, clear=false){
@@ -184,3 +189,4 @@ function terminalOutput(output, clear=false){
         consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
     }
 }
+

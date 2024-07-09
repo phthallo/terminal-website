@@ -66,10 +66,9 @@ hr {
   margin-top: 2em;
   .specs {
     margin-left: 1em;
+    max-width: 600px
   }
-  .distro {
-    margin-right: 1em;
-  }
+
   @media (width <= 600px) {
     flex-direction: column;
     .specs {
@@ -80,7 +79,8 @@ hr {
 
 #console {
   margin-left:1em;
-  margin-bottom:1em;
+  margin-bottom:2em;
+  margin-right: 1em;
   .distro {
     margin-left: -1em;
     margin-right: 1em;
