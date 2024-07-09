@@ -25,7 +25,6 @@ pre {
   color: white;
   font-family:'0xProto', monospace;
   line-height: 0.3em;
-
 }
 
 hr {
@@ -41,6 +40,7 @@ h4 {
 .distro {
   display: inline-block;
   vertical-align:top;
+  margin-right: 1em;
 }
 
 .specs {
@@ -77,19 +77,13 @@ hr {
 }
 
 .distro, .specs {
-  margin-top: 20px;
+  margin-top: 2em;
 }
-.specs {
-  margin-left: 20px;
-}
+
 
 @media (width <= 900px) {
   hr {
     width: 100%;
-  }
-  
-  .specs, .distro, .console-input { 
-    font-size:1em;
   }
 
   .project-wrapper {
@@ -123,9 +117,21 @@ a {
   color: var(--lightblue);
 }
 
-#console, #initial {
-  margin-left:20px;
-  margin-bottom:20px;
+
+#initial {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+  .specs {
+    margin-left: 1em;
+  }
+  @media (width <= 600px) {
+    flex-direction: column;
+  }
+}
+#console {
+  margin-left:1em;
+  margin-bottom:1em;
   .console-input {
     span:empty { 
       padding-right:1em;
