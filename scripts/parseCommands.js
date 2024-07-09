@@ -1,9 +1,30 @@
 import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime } from "./index.js";
+
+let knight = `
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠶⠀⠀⠀⠀⠀⣈⣿⣦⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠹⣿⣿⡆⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣤⣤⣴⣤⣤⣄⠀⢠⣿⣿⠇⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢸⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣾⠋⠈⢻⣿⡝⠁⠀⢻⣿⣿⠋⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣄⣠⣿⣿⣧⣀⣠⣿⣿⣿⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⡿⠟⠀⣀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣷⡾⠿⠛⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⡿⠓⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⡀⠀⠀⠀⠀⠀
+    ⠀⣰⡟⠉⣼⣿⠟⣡⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀
+    ⢠⣿⠀⠀⣿⣿⣾⠿⠛⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡛⠻⠑⡀
+    ⠈⣿⠀⡼⢿⡏⠀⠀⠀⠹⣿⡆⠉⠻⣿⣿⣿⣿⣿⡻⢿⣿⠷⠞⠁
+    ⠀⢸⠇⠀⠈⡇⠀⠀⠀⠀⠘⢿⡄⠀⠸⡏⠀⠀⠉⡇⠀⠹⢦⡄⠀
+    ⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠸⠁⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
+`
 var inputHistory = [""]
 var currentPos = -1
 var prideActivated = false
+var voidActivated = false
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
@@ -77,31 +98,20 @@ function parseTextInput(tex){
             help();
             break;
         case "hyfetch":
-            if (!(prideActivated)){
-                var themed = hyfetch({replace: false});
-            } else {
-                var themed = hyfetch({flagColours:[
-                    '#9b4b4b',
-                    '#ac8453',
-                    '#aca653',
-                    '#2b5a37',
-                    '#536eac',
-                    '#55305a'
-                ], replace: false});
+            let localReplace = true;
+            if (prideActivated){
+                var localFlagColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a'];
+            } 
+            if (voidActivated) {
+                var localFlagAscii = knight;
             }
+            let themed = hyfetch({distroAscii: localFlagAscii, flagColours: localFlagColours, replace: localReplace});
             terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
             renderFact();
             checkTime();
             break;
         case "pride":
-            hyfetch({flagColours:[
-                '#9b4b4b',
-                '#ac8453',
-                '#aca653',
-                '#2b5a37',
-                '#536eac',
-                '#55305a'
-            ]});
+            hyfetch({flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
             prideActivated = true;
             terminalOutput("<p>Happy Pride!</p>");
             break;
@@ -119,6 +129,12 @@ function parseTextInput(tex){
         case "pyflagoras":
             pyflagoras(parameter);
             break;
+        case "void":
+            hyfetch({distroAscii: knight, replace: true})
+            voidActivated = true;
+            terminalOutput("<p>No voice to cry suffering.</p>");
+        break;
+
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }
@@ -170,10 +186,11 @@ function help(){
 function pyflagoras(parameter){
     if (!(parameter)){
         terminalOutput(`
-usage: pyflagoras [-h] [-f FLAG] [-n NAME] [--verbose] [--svg] [--version] [-l] image<br>
+usage: pyflagoras [-h] [-f FLAG] [-n NAME] [--verbose] [--svg] [--version] [-l] image<p>
 pyflagoras: error: the following arguments are required: image<p>`)
     } else {
-        terminalOutput("Pyflagoras won't work here D: You can still check it out on <a href = 'https://github.com/phthallo/pyflagoras'>GitHub</a>!<p>")
+        terminalOutput("🏳️‍🌈 Redirecting user to phthallo/pyflagoras... <p>")
+        window.location.href = "https://github.com/phthallo/pyflagoras";
     }
 }
 

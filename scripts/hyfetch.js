@@ -65,6 +65,7 @@ export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", 
       renderFact();
     } else if (replace) {
       document.querySelectorAll(".distro").forEach(x => x.innerHTML = colouredLines.join(""));
+      return [colouredLines, specs]
     } else {
         return [colouredLines, specs];
     }
