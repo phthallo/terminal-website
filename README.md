@@ -8,6 +8,6 @@ Featuring:
 - `ls`, `cat`, `clear`, and maybe a few other commands :) 
 - Fun and completely useless facts!
 - Accurate timestamps and uptime! (relative to the viewer)
-
+- Easter eggs! (I counted 7)
 
 Check it out at https://phthallo.hackclub.app 

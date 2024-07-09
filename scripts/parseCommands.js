@@ -2,7 +2,7 @@ import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime } from "./index.js";
 
-let knight = `
+const knight = `
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠶⠀⠀⠀⠀⠀⣈⣿⣦⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠹⣿⣿⡆⠀⠀⠀
@@ -21,6 +21,8 @@ let knight = `
     ⠀⢸⠇⠀⠈⡇⠀⠀⠀⠀⠘⢿⡄⠀⠸⡏⠀⠀⠉⡇⠀⠹⢦⡄⠀
     ⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠸⠁⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
 `
+const prideColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']
+
 var inputHistory = [""]
 var currentPos = -1
 var prideActivated = false
@@ -98,20 +100,23 @@ function parseTextInput(tex){
             help();
             break;
         case "hyfetch":
-            let localReplace = true;
             if (prideActivated){
-                var localFlagColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a'];
+                var fileFlagColours = prideColours;
             } 
             if (voidActivated) {
-                var localFlagAscii = knight;
+                var fileFlagAscii = knight;
             }
-            let themed = hyfetch({distroAscii: localFlagAscii, flagColours: localFlagColours, replace: localReplace});
+            let themed = hyfetch({distroAscii: fileFlagAscii, flagColours: fileFlagColours});
             terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
             renderFact();
             checkTime();
             break;
         case "pride":
-            hyfetch({flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
+            if (voidActivated){
+                var fileFlagAscii = knight;
+            }
+            hyfetch({distroAscii: fileFlagAscii, flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
+            
             prideActivated = true;
             terminalOutput("<p>Happy Pride!</p>");
             break;
@@ -130,7 +135,10 @@ function parseTextInput(tex){
             pyflagoras(parameter);
             break;
         case "void":
-            hyfetch({distroAscii: knight, replace: true})
+            if (prideActivated){
+                var fileFlagColours = prideColours;
+            }
+            hyfetch({distroAscii: knight, flagColours: fileFlagColours})
             voidActivated = true;
             terminalOutput("<p>No voice to cry suffering.</p>");
         break;
