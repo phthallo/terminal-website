@@ -213,5 +213,8 @@ function terminalOutput(output, clear=false){
         consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
     }
     autoScroll();
+    let text = consol.querySelector("div:last-child .text-input");
+    text.focus();
+
 }
 

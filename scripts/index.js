@@ -38,7 +38,7 @@ setInterval(checkTime(), 60000);
 export async function funFact() {
     const res = await fetch('assets/facts.html', {});
     const text = await res.text();
-    return await (text.split("<br>"))[Math.floor(Math.random()* (text.split("\r\n")).length)];
+    return await (text.split("\n"))[Math.floor(Math.random()* (text.split("\n")).length)];
 }
 
 export async function renderFact() {
