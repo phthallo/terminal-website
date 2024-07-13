@@ -6,6 +6,11 @@ window.setInterval(function() {
     elem.scrollTop = elem.scrollHeight;
   }, 2000);
 
+export function autoScroll() {
+    var elem = consol;
+    elem.scrollTop = elem.scrollHeight;
+}
+
 let x = hyfetch({initial: true, replace: false});
 
 export function genTimestamp() {
@@ -33,7 +38,7 @@ setInterval(checkTime(), 60000);
 export async function funFact() {
     const res = await fetch('assets/facts.html', {});
     const text = await res.text();
-    return await (text.split("\r\n"))[Math.floor(Math.random()* (text.split("\r\n")).length)];
+    return await (text.split("<br>"))[Math.floor(Math.random()* (text.split("\r\n")).length)];
 }
 
 export async function renderFact() {

@@ -1,6 +1,6 @@
 import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
-import { genTimestamp, renderFact, checkTime } from "./index.js";
+import { genTimestamp, renderFact, checkTime, autoScroll } from "./index.js";
 
 const knight = `
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
@@ -142,7 +142,6 @@ function parseTextInput(tex){
             voidActivated = true;
             terminalOutput("<p>No voice to cry suffering.</p>");
         break;
-
         default: 
             terminalOutput(`-bash: ${text}: command not found<p>`);
     }
@@ -203,7 +202,7 @@ pyflagoras: error: the following arguments are required: image<p>`)
 }
 
 function terminalOutput(output, clear=false){
-    prompt =  `<span class = "console-input">
+    let prompt =  `<span class = "console-input">
         <b>phthallo</b>@<b>hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
         <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>
     </span>`
@@ -213,5 +212,6 @@ function terminalOutput(output, clear=false){
         consol.innerHTML += ('<div id = "">' + output + '</div>');
         consol.innerHTML  += ('<div id = "">' + prompt + '</div>');
     }
+    autoScroll();
 }
 
