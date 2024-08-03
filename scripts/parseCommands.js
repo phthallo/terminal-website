@@ -31,13 +31,19 @@ const dino = `
 /__.-'|_|--|_| 
 `
 
-
 const prideColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']
 
 const commands = {
     "ls": "<p>about_me  contacts  projects  about_site<p>",
     "sudo": `<img class="post-content" src="assets/hk.png"></img>`,
     "rawr": asciiArt(dino)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.<p>',
+    "help": help,
+    "cat": cat,
+    "pyflagoras": pyflagoras,
+    "rm": rm,
+    "hyfetch": commandHyfetch,
+    "pride": pride,
+    "void": commandVoid
 }
 
 var inputHistory = [""]
@@ -89,63 +95,22 @@ function keyDownTextField(e) {
             latestTextField.textContent = inputHistory[inputHistory.length + currentPos]
         } else {
             currentPos --
-}
+        }
     }
-
 }
 
 function parseTextInput(tex){
     var text = sanitise(tex.toLowerCase());
-    var [command, parameter] = text.split(" ");
-
+    var [command, parameter, _] = text.split(/ (.+)/);
+    console.log(command)
     if (command in commands){
-        terminalOutput(commands[command])
-    } else {
-        switch(command) {
-            case "cat":
-                cat(parameter);
-                break;
-            case "rm":
-                terminalOutput(`rm: cannot perform '${text}': Permission denied<p>`);
-                break;
-            case "help":
-                help();
-                break;
-            case "hyfetch":
-                if (prideActivated){
-                    var fileFlagColours = prideColours;
-                } 
-                if (voidActivated) {
-                    var fileFlagAscii = knight;
-                }
-                let themed = hyfetch({distroAscii: fileFlagAscii, flagColours: fileFlagColours});
-                terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
-                renderFact();
-                checkTime();
-                break;
-            case "pride":
-                if (voidActivated){
-                    var fileFlagAscii = knight;
-                }
-                hyfetch({distroAscii: fileFlagAscii, flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
-                
-                prideActivated = true;
-                terminalOutput("<p>Happy Pride!</p>");
-                break;
-            case "pyflagoras":
-                pyflagoras(parameter);
-                break;
-            case "void":
-                if (prideActivated){
-                    var fileFlagColours = prideColours;
-                }
-                hyfetch({distroAscii: knight, flagColours: fileFlagColours})
-                voidActivated = true;
-                terminalOutput("<p>No voice to cry suffering.</p>");
-            break;
-            default: 
-                terminalOutput(`-bash: ${text}: command not found<p>`);
+        if (typeof commands[command] == "string"){
+            terminalOutput(commands[command])
+        } else {
+            commands[command](parameter)
         }
+    } else {
+        terminalOutput(`-bash: ${text}: command not found<p>`);
     }
 }
 
@@ -197,6 +162,42 @@ pyflagoras: error: the following arguments are required: image<p>`)
         terminalOutput("🏳️‍🌈 Redirecting user to phthallo/pyflagoras... <p>")
         window.location.href = "https://github.com/phthallo/pyflagoras";
     }
+}
+
+function rm(parameter){
+    terminalOutput(`rm: cannot perform 'rm ${parameter}': Permission denied<p>`)
+}
+
+function commandHyfetch(){
+    if (prideActivated){
+        var fileFlagColours = prideColours;
+    } 
+    if (voidActivated) {
+        var fileFlagAscii = knight;
+    }
+    let themed = hyfetch({distroAscii: fileFlagAscii, flagColours: fileFlagColours});
+    terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
+    renderFact();
+    checkTime();
+}
+
+function pride(){
+    if (voidActivated){
+        var fileFlagAscii = knight;
+    }
+    hyfetch({distroAscii: fileFlagAscii, flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
+    prideActivated = true;
+    terminalOutput("<p>Happy Pride!</p>");
+}
+
+function commandVoid(){
+    if (prideActivated){
+        var fileFlagColours = prideColours;
+    }
+    hyfetch({distroAscii: knight, flagColours: fileFlagColours})
+    voidActivated = true;
+    terminalOutput("<p>No voice to cry suffering.</p>");
+
 }
 
 function terminalOutput(output, clear=false){
