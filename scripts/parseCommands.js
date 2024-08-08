@@ -62,7 +62,6 @@ const commands = {
 
 const folderegex = new RegExp("[A-Za-z]+/[^\/]+\.md")
 
-
 var inputHistory = [""]
 var currentPos = -1
 var prideActivated = false
@@ -74,15 +73,15 @@ document.addEventListener("paste", onpaste, false);
 var consol = document.getElementById("console");
 
 function focusText(e) {
-    var keyCode = e.keyCode;
+    let keyCode = e.keyCode;
     if(keyCode==13){
-        var text = consol.querySelector("div:last-child .console-input .text-input");
+        let text = consol.querySelector("div:last-child .console-input .text-input");
         text.focus();
     }
 }
 
 function keyDownTextField(e) {
-    var keyCode = e.keyCode;
+    let keyCode = e.keyCode;
     if (keyCode == 13){ 
         if (!((document.activeElement.textContent).trim())){ // If enter is being pressed when the editable field is empty
             e.preventDefault();
@@ -141,10 +140,10 @@ function ls(){
 }
 
 function cd(path){
-    if (!((Object.keys(files).includes(path)) || (path == ".."))){
+    if (!((Object.keys(files).includes(path)) || (path == "..") || (path === undefined))){
             terminalOutput(`-bash: cd: ${path}: No such file or directory`);
     } else {
-        if ((path == ".." || !(path))){
+        if ((path == ".." || path === undefined)){
             cwd = ""
         } else {
             cwd = path
