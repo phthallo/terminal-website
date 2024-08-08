@@ -37,12 +37,12 @@ const prideColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a
 
 const files  = {
     "": ["about_me.md", "about_site.md", "contacts.md", "projects.md"],
-    "posts": ["boreal_express.md"]
+    "blog": ["boreal_express.md"]
 }
 
 const subfolders = {
-    "": ["posts", ""],
-    "posts": [""]
+    "": ["blog", ""],
+    "blog": [""]
 }
 
 const commands = {
