@@ -11,8 +11,8 @@
   --lightgrey: #bbb8bb; 
   --pink:  #dcb8b0;
   --peach:  #e5cab7;
-  --blue:  #9bb0cd;
-  --lightblue:  #cad5db;
+  --bluet:  #9bb0cd;
+  --lightbluet:  #cad5db;
   --prideorange: #D62800;
   --pridelightorange: #FF9B56;
   --pridelightpink: #D462A6;
@@ -58,6 +58,10 @@ hr {
   }
 }
 
+.directory {
+  color: var(--bluet);
+}
+
 .hyfetch {
   display: flex;
   flex-direction: row;
@@ -89,6 +93,8 @@ hr {
     span:empty { 
       padding-right:1em;
     }  
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
   }
 }
 
@@ -115,7 +121,7 @@ hr {
 
 
 .timestamp {
-  color: var(--lightblue);
+  color: var(--lightbluet);
 }
 
 .text-input {
@@ -172,11 +178,11 @@ hr {
   }
   
   &.blue {
-    background-color: #9bb0cd;
+    background-color: var(--bluet);
   }
   
   &.lightblue {
-    background-color: #cad5db;
+    background-color: var(--lightbluet);
   }
   
 }

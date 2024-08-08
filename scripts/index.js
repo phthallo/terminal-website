@@ -50,7 +50,7 @@ export async function renderFact() {
 
 consol.querySelector("#l1 .console-input").innerHTML = `
         <b>phthallo</b>@<b>hackclub.app</b> <span class = "timestamp">${genTimestamp()}:~$</span>
-        <span class = "text-input"  spellcheck="false" contenteditable = "true"></span>`
+        <span class = "text-input" spellcheck="false" contenteditable = "true"></span>`
 
 let text = document.querySelector(".text-input");
 text.focus();
