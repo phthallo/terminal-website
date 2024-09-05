@@ -133,9 +133,20 @@ hr {
   }
 }
 
+
+.files {
+  width: 70%;
+  display: grid;
+  grid-gap: 0.5em;
+  grid-template-columns: repeat( 4, minmax(25%, 1fr) );
+}
+
 /* || MOBILE STYLES */
 
 @media (width <= 900px) {
+  body {
+    font-size: 14px;
+  }
   hr {
     width: 100%;
   }
@@ -150,8 +161,21 @@ hr {
     max-width: 100%;
   }
 
+  .files {
+    grid-template-columns: repeat( 2, minmax(50%, 1fr) );
+  }
 }
 
+
+@media screen and (width < 450px){
+  body {
+    font-size: 13px;
+  }
+  .files {
+    grid-template-columns: repeat( 1, minmax(100%, 1fr) );
+
+  }
+}
 
 .palette {
   display: inline-block;

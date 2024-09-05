@@ -2,7 +2,6 @@ import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime, autoScroll } from "./index.js";
 
-var cwd = ""
 const knight = `
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠶⠀⠀⠀⠀⠀⣈⣿⣦⠀⠀⠀⠀
@@ -41,7 +40,7 @@ const files  = {
 }
 
 const subfolders = {
-    "": ["blog", ""],
+    "": ["blog"],
     "blog": [""]
 }
 
@@ -57,7 +56,15 @@ const commands = {
     "rm": rm,
     "hyfetch": commandHyfetch,
     "pride": pride,
-    "void": commandVoid
+    "void": commandVoid,
+}
+
+const commandsHelp = {
+    "ls": "Lists all files in the current working directory",
+    "cd [folder]": "Change the current working directory to [folder]",
+    "cat [file]": "Outputs the contents of [file] to the terminal",
+    "clear": "Resets the terminal; clears it of all past commands",
+    "hyfetch": "Prints system information [<a href = 'https://github.com/hykilpikonna/hyfetch'>neofetch</a> with pride flags <3]"
 }
 
 const folderegex = new RegExp("[A-Za-z]+/[^\/]+\.md")
@@ -66,6 +73,8 @@ var inputHistory = [""]
 var currentPos = -1
 var prideActivated = false
 var voidActivated = false
+var cwd = ""
+
 document.addEventListener("keydown", keyDownTextField, false);
 document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
@@ -136,7 +145,17 @@ function parseTextInput(tex){
 }
 
 function ls(){
-    terminalOutput(`<span class = "directory">${subfolders[cwd].join("&nbsp&nbsp&nbsp")}</span> ${files[cwd].join("&nbsp&nbsp&nbsp")}`)
+    let output = ""
+    if (subfolders[cwd].filter((el) => el != "").length){
+        console.log(subfolders[cwd].filter((el) => el != ""))
+        output += `<span class = "directory">${subfolders[cwd].join("</span><span class = 'directory'>")}</span>`
+    }
+    if (files[cwd].filter((el) => el != "").length){
+        output += ` <span>${files[cwd].join("</span><span>")}</span>`
+    }
+    terminalOutput(`<span class = "files">
+       ${output}
+       </span>`)
 }
 
 function cd(path){
@@ -171,22 +190,15 @@ function cat(file){
 }
 
 function help(){
-    let commands = {
-        "ls": "Lists all files in the current working directory",
-        "cd [folder]": "Change the current working directory to [folder]",
-        "cat [file]": "Outputs the contents of [file] to the terminal",
-        "clear": "Resets the terminal; clears it of all past commands",
-        "hyfetch": "Prints system information [<a href = 'https://github.com/hykilpikonna/hyfetch'>neofetch</a> with pride flags <3]"
-    }
     let paired = []
-    for (let i = 0; i < Object.keys(commands).length; i++){
+    for (let i = 0; i < Object.keys(commandsHelp).length; i++){
         paired.push(`
         <div class = "project-wrapper">
             <div class= "project-title">
-            ${Object.keys(commands)[i]}
+            ${Object.keys(commandsHelp)[i]}
             </div>
             <div class = "project-desc">
-                ${Object.values(commands)[i]}
+                ${Object.values(commandsHelp)[i]}
                 <p>
             </div>
         </div>`)
@@ -240,6 +252,7 @@ function commandVoid(){
     terminalOutput("No voice to cry suffering.");
 
 }
+
 
 function terminalOutput(output, clear=false){
     if (cwd){

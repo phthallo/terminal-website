@@ -12,5 +12,5 @@
     <li>art of all kinds 
     <li><a href = "https://open.spotify.com/user/by9ol1keui3n1yfhqpxskyjn3?si=44ce65169041461b">music</a>; primarily indie and alternative bands
 </ul>
-i'd tell you to go to <a href = "https://phthallo.com">https://phthallo.com</a>, but it's a work in progress. :'D </p>
+i'd tell you to go to my main website, <a href = "https://phthallo.com">https://phthallo.com</a>, but it's still a work in progress. :'D </p>
 </div>
