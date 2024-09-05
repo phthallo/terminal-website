@@ -1,5 +1,5 @@
 # terminal-website
-![image](https://github.com/phthallo/terminal-website/assets/84078890/9bca2816-4105-472c-81fd-853cdcbcf15f)
+![image](https://github.com/user-attachments/assets/a546fcf3-668c-4729-b016-df20fb8b8aab)
 
 Frontend for my personal Linux terminal-style website! (complete with Hyfetch)
 
