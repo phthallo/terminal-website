@@ -127,7 +127,7 @@ function parseTextInput(tex){
     if (command in COMMANDS){
         if (COMMANDS[command]["type"] == "output"){
             terminalOutput(COMMANDS[command]["action"])
-        } else if (COMMANDS[command]["type"] == 0)  {
+        } else if (COMMANDS[command]["type"] == "boolean")  {
             terminalOutput("", true)
         } else {
             COMMANDS[command]["action"](parameter)
