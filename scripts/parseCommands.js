@@ -127,7 +127,7 @@ function parseTextInput(tex){
     if (command in COMMANDS){
         if (COMMANDS[command]["type"] == "output"){
             terminalOutput(COMMANDS[command]["action"])
-        } else if (COMMANDS[command]["type"] == "boolean")  {
+        } else if (COMMANDS[command]["action"] == 0)  {
             terminalOutput("", true)
         } else {
             COMMANDS[command]["action"](parameter)
@@ -187,14 +187,14 @@ function cat(file){
 
 function help(){
     let paired = []
-    for (let i = 0; i < Object.keys(COMMANDSHELP).length; i++){
+    for (let i = 0; i < Object.keys(config.COMMANDSHELP).length; i++){
         paired.push(`
         <div class = "project-wrapper">
             <div class= "project-title">
-            ${Object.keys(COMMANDSHELP)[i]}
+            ${Object.keys(config.COMMANDSHELP)[i]}
             </div>
             <div class = "project-desc">
-                ${Object.values(COMMANDSHELP)[i]}
+                ${Object.values(config.COMMANDSHELP)[i]}
                 <p>
             </div>
         </div>`)
