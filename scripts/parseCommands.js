@@ -4,7 +4,7 @@ import { genTimestamp, renderFact, checkTime, autoScroll } from "./index.js";
 import * as config from "./config.js";
 
 // commands and their associated actions
-export const COMMANDS = {
+const COMMANDS = {
     "ls": {
         "type": "function",
         "action": ls
