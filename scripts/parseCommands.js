@@ -1,71 +1,61 @@
 import { sanitise, onpaste, asciiArt } from "./utils.js";
 import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime, autoScroll } from "./index.js";
+import * as config from "./config.js";
 
-const knight = `
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠶⠀⠀⠀⠀⠀⣈⣿⣦⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠹⣿⣿⡆⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣤⣤⣴⣤⣤⣄⠀⢠⣿⣿⠇⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⢸⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⣾⠋⠈⢻⣿⡝⠁⠀⢻⣿⣿⠋⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠈⣿⣄⣠⣿⣿⣧⣀⣠⣿⣿⣿⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⡿⠟⠀⣀⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣷⡾⠿⠛⠀⠀⠀⠀⠀
-    ⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⡿⠓⠀⠀⠀⠀⠀⠀⠀
-    ⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣀⡀⠀⠀⠀⠀⠀
-    ⠀⣰⡟⠉⣼⣿⠟⣡⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀
-    ⢠⣿⠀⠀⣿⣿⣾⠿⠛⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡛⠻⠑⡀
-    ⠈⣿⠀⡼⢿⡏⠀⠀⠀⠹⣿⡆⠉⠻⣿⣿⣿⣿⣿⡻⢿⣿⠷⠞⠁
-    ⠀⢸⠇⠀⠈⡇⠀⠀⠀⠀⠘⢿⡄⠀⠸⡏⠀⠀⠉⡇⠀⠹⢦⡄⠀
-    ⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠸⠁⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
-`
-
-const dino = `
-               __
-              / _)
-     _.----._/ /
-    /         /
- __/ (  | (  |
-/__.-'|_|--|_| 
-`
-
-const prideColours = ['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']
-
-
-const files  = {
-    "": ["about_me.md", "about_site.md", "contact.md", "projects.md"],
-    "blog": ["boreal_express.md"]
+// commands and their associated actions
+export const COMMANDS = {
+    "ls": {
+        "type": "function",
+        "action": ls
+        },
+    "sudo": {
+        "type": "output",
+        "action": `<img class="post-content" src="assets/hk.png"></img>`
+        },
+    "cd": {
+        "type": "function",
+        "action": cd
+        },
+    "help": {
+        "type": "function",
+        "action": help
+        },
+    "clear": {
+        "type": "boolean",
+        "action": 0
+        },
+    "rawr": {
+        "type": "function", 
+        "action": asciiArt(config.DINO)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.'
+        }, 
+    "cat": {
+        "type": "function", 
+        "action": cat
+        },
+    "pyflagoras": {
+        "type": "function", 
+        "action": pyflagoras
+        },
+    "rm": {
+        "type": "function", 
+        "action": rm
+        },
+    "hyfetch": {
+        "type": "function", 
+        "action": commandHyfetch
+        },
+    "pride":  {
+        "type": "function", 
+        "action": pride
+        },
+    "void":  {
+        "type": "function", 
+        "action": commandVoid
+        }
 }
 
-const subfolders = {
-    "": ["blog"],
-    "blog": [""]
-}
 
-const commands = {
-    "ls": ls,
-    "sudo": `<img class="post-content" src="assets/hk.png"></img>`,
-    "cd": cd,
-    "help": help,
-    "clear": 0,
-    "rawr": asciiArt(dino)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.',
-    "cat": cat,
-    "pyflagoras": pyflagoras,
-    "rm": rm,
-    "hyfetch": commandHyfetch,
-    "pride": pride,
-    "void": commandVoid,
-}
-
-const commandsHelp = {
-    "ls": "Lists all files in the current working directory",
-    "cd [folder]": "Change the current working directory to [folder]",
-    "cat [file]": "Outputs the contents of [file] to the terminal",
-    "clear": "Resets the terminal; clears it of all past commands",
-    "hyfetch": "Prints system information [<a href = 'https://github.com/hykilpikonna/hyfetch'>neofetch</a> with pride flags <3]"
-}
 
 const folderegex = new RegExp("[A-Za-z]+/[^\/]+\.md")
 
@@ -80,6 +70,7 @@ document.addEventListener("keyup", focusText, false);
 document.addEventListener("paste", onpaste, false);
 
 var consol = document.getElementById("console");
+
 
 function focusText(e) {
     let keyCode = e.keyCode;
@@ -124,20 +115,22 @@ function keyDownTextField(e) {
     }
 }
 
+
 function parseTextInput(tex){
-    if (! (folderegex.test( tex.split(/ (.+)/)[1]) )){
+    if (!(folderegex.test( tex.split(/ (.+)/)[1]) )){
         var text = sanitise(tex.toLowerCase());
     } else {
         var text = tex.toLowerCase();
     }
     let [command, parameter, _] = text.split(/ (.+)/);
-    if (command in commands){
-        if (typeof commands[command] == "string"){
-            terminalOutput(commands[command])
-        } else if (commands[command] == 0)  {
+    command = command.trim();
+    if (command in COMMANDS){
+        if (COMMANDS[command]["type"] == "output"){
+            terminalOutput(COMMANDS[command]["action"])
+        } else if (COMMANDS[command]["type"] == 0)  {
             terminalOutput("", true)
         } else {
-            commands[command](parameter)
+            COMMANDS[command]["action"](parameter)
         }
     } else {
         terminalOutput(`-bash: ${text}: command not found`);
@@ -146,12 +139,11 @@ function parseTextInput(tex){
 
 function ls(){
     let output = ""
-    if (subfolders[cwd].filter((el) => el != "").length){
-        console.log(subfolders[cwd].filter((el) => el != ""))
-        output += `<span class = "directory">${subfolders[cwd].join("</span><span class = 'directory'>")}</span>`
+    if (config.SUBFOLDERS[cwd].filter((el) => el != "").length){
+        output += `<span class = "directory">${config.SUBFOLDERS[cwd].join("</span><span class = 'directory'>")}</span>`
     }
-    if (files[cwd].filter((el) => el != "").length){
-        output += ` <span>${files[cwd].join("</span><span>")}</span>`
+    if (config.FILES[cwd].filter((el) => el != "").length){
+        output += ` <span>${config.FILES[cwd].join("</span><span>")}</span>`
     }
     terminalOutput(`<span class = "files">
        ${output}
@@ -159,24 +151,28 @@ function ls(){
 }
 
 function cd(path){
-    if (!((Object.keys(files).includes(path)) || (path == "..") || (path === undefined))){
-            terminalOutput(`-bash: cd: ${path}: No such file or directory`);
-    } else {
-        if ((path == ".." || path === undefined)){
+    let output = ""
+    if (config.FILES[cwd].includes(path)){ // this doesn't account for cd foo/bar/etc but since i don't have any nested subfolders, it's not an issue... for now.
+        output = `-bash: cd: ${path}: Not a directory`
+    } else if ((path == ".." || path === undefined )){
             cwd = ""
-        } else {
+    } else if (config.SUBFOLDERS[cwd].includes(path)) {
             cwd = path
-        }
-        terminalOutput("");
+    } else {
+        output = `-bash: cd: ${path}: No such file or directory`
     }
+    terminalOutput(output);
 }
+
 
 function cat(file){
     let localcwd = cwd + file.substring(0, file.lastIndexOf('/')); 
     let localfile = file.substring(file.lastIndexOf('/')+1);
-    if (files[localcwd] === undefined || !(files[localcwd].includes(localfile))){
-        terminalOutput(`${file}: No such file or directory`)
-    } else if (files[localcwd].includes(localfile)){
+    if (config.FILES[localcwd] === undefined){
+        terminalOutput(`cat: ${file}: No such file or directory`)
+    } else if (config.SUBFOLDERS[localcwd].includes(file)){
+        terminalOutput(`cat: ${file}: Is a directory`)
+    } else if (config.FILES[localcwd].includes(localfile)){
         fetch(`files/${localcwd}/${localfile}`)
         .then((res => res.text()))
         .then((text) => {
@@ -191,14 +187,14 @@ function cat(file){
 
 function help(){
     let paired = []
-    for (let i = 0; i < Object.keys(commandsHelp).length; i++){
+    for (let i = 0; i < Object.keys(COMMANDSHELP).length; i++){
         paired.push(`
         <div class = "project-wrapper">
             <div class= "project-title">
-            ${Object.keys(commandsHelp)[i]}
+            ${Object.keys(COMMANDSHELP)[i]}
             </div>
             <div class = "project-desc">
-                ${Object.values(commandsHelp)[i]}
+                ${Object.values(COMMANDSHELP)[i]}
                 <p>
             </div>
         </div>`)
@@ -223,10 +219,10 @@ function rm(parameter){
 
 function commandHyfetch(){
     if (prideActivated){
-        var fileFlagColours = prideColours;
+        var fileFlagColours = config.COLOURS;
     } 
     if (voidActivated) {
-        var fileFlagAscii = knight;
+        var fileFlagAscii = config.KNIGHT;
     }
     let themed = hyfetch({distroAscii: fileFlagAscii, flagColours: fileFlagColours});
     terminalOutput(`<div class = "hyfetch"><div class = "distro">${(themed[0]).join("")}</div><div class = "specs">${themed[1]}</div>`)
@@ -236,7 +232,7 @@ function commandHyfetch(){
 
 function pride(){
     if (voidActivated){
-        var fileFlagAscii = knight;
+        var fileFlagAscii = config.KNIGHT;
     }
     hyfetch({distroAscii: fileFlagAscii, flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
     prideActivated = true;
@@ -245,7 +241,7 @@ function pride(){
 
 function commandVoid(){
     if (prideActivated){
-        var fileFlagColours = prideColours;
+        var fileFlagColours = config.COLOURS;
     }
     hyfetch({distroAscii: knight, flagColours: fileFlagColours})
     voidActivated = true;

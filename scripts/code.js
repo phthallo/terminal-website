@@ -6,7 +6,7 @@ function code(e){
   if (e.keyCode == sequence[streak]){
     streak ++;
     if (streak == sequence.length){
-        var audio = new Audio("assets/wow_so_secret.webm");
+        let audio = new Audio("assets/wow_so_secret.webm");
         audio.play();
     } 
   } else {

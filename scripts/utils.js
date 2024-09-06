@@ -31,3 +31,4 @@ export function asciiArt(ascii){
   }
   return formattedLines.join("");
 }
+
