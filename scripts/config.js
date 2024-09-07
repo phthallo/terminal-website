@@ -10,18 +10,6 @@ export const SUBFOLDERS = {
     "blog": [""]
 }
 
-
-// Help text for certain commands
-export const COMMANDSHELP = {
-    "ls": "Lists all files in the current working directory",
-    "cd [folder]": "Change the current working directory to [folder]",
-    "cat [file]": "Outputs the contents of [file] to the terminal",
-    "clear": "Resets the terminal; clears it of all past commands",
-    "hyfetch": "Prints system information [<a href = 'https://github.com/hykilpikonna/hyfetch'>neofetch</a> with pride flags <3]"
-}
-
-
-
 export const KNIGHT = `
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠶⠀⠀⠀⠀⠀⣈⣿⣦⠀⠀⠀⠀

@@ -7,51 +7,63 @@ import * as config from "./config.js";
 const COMMANDS = {
     "ls": {
         "type": "function",
-        "action": ls
+        "action": "ls",
+        "help": "Lists all files in the current working directory"
         },
     "sudo": {
         "type": "output",
-        "action": `<img class="post-content" src="assets/hk.png"></img>`
+        "action": `<img class="post-content" src="assets/hk.png"></img>`,
+        "help": ""
         },
     "cd": {
         "type": "function",
-        "action": cd
+        "action": cd,
+        "help": "Change the current working directory to [folder]"
         },
     "help": {
         "type": "function",
-        "action": help
+        "action": help,
+        "help": "Outputs help text"
         },
     "clear": {
         "type": "boolean",
-        "action": 0
+        "action": 0,
+        "help": "Clears the terminal"
         },
     "rawr": {
         "type": "function", 
-        "action": asciiArt(config.DINO)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.'
+        "action": asciiArt(config.DINO)+'<a href = "https://github.com/hackclub/dinosaurs?tab=readme-ov-file#hack-club-dinosaurs">Orpheus</a> says hi.',
+        "help": ""
         }, 
     "cat": {
         "type": "function", 
-        "action": cat
+        "action": cat,
+        "help": "Outputs the contents of [file]"
         },
     "pyflagoras": {
         "type": "function", 
-        "action": pyflagoras
+        "action": pyflagoras,
+        "help": ""
         },
     "rm": {
         "type": "function", 
-        "action": rm
+        "action": rm,
+        "help": "Removes [file]"
         },
     "hyfetch": {
         "type": "function", 
-        "action": commandHyfetch
+        "action": commandHyfetch,
+        "help": ""
         },
     "pride":  {
         "type": "function", 
-        "action": pride
+        "action": pride,
+        "help": ""
         },
     "void":  {
         "type": "function", 
-        "action": commandVoid
+        "action": commandVoid,
+        "help": ""
         }
 }
 
@@ -187,17 +199,19 @@ function cat(file){
 
 function help(){
     let paired = []
-    for (let i = 0; i < Object.keys(config.COMMANDSHELP).length; i++){
-        paired.push(`
-        <div class = "project-wrapper">
-            <div class= "project-title">
-            ${Object.keys(config.COMMANDSHELP)[i]}
-            </div>
-            <div class = "project-desc">
-                ${Object.values(config.COMMANDSHELP)[i]}
-                <p>
-            </div>
-        </div>`)
+    for (var command in COMMANDS){
+        if (COMMANDS[command]["help"]){
+            paired.push(`
+            <div class = "project-wrapper">
+                <div class= "project-title">
+                ${command}
+                </div>
+                <div class = "project-desc">
+                    ${COMMANDS[command]["help"]}
+                    <p>
+                </div>
+            </div>`)
+        }
     }
     terminalOutput(`<hr></hr> ${paired.join("")} <p>There may be more commands ;)`);
 }

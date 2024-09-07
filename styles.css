@@ -112,6 +112,7 @@ hr {
   }
   .project-desc {
     max-width: 70%;
+    text-align: right;
   }
 }
 
