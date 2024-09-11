@@ -3,6 +3,8 @@ import { hyfetch } from "./hyfetch.js";
 import { genTimestamp, renderFact, checkTime, autoScroll } from "./index.js";
 import * as config from "./config.js";
 
+var currentEffects = [false, false]
+
 // commands and their associated actions
 const COMMANDS = {
     "ls": {
@@ -73,8 +75,6 @@ const folderegex = new RegExp("[A-Za-z]+/[^\/]+\.md")
 
 var inputHistory = [""]
 var currentPos = -1
-var prideActivated = false
-var voidActivated = false
 var cwd = ""
 
 document.addEventListener("keydown", keyDownTextField, false);
@@ -232,10 +232,10 @@ function rm(parameter){
 }
 
 function commandHyfetch(){
-    if (prideActivated){
+    if (currentEffects[0]){
         var fileFlagColours = config.COLOURS;
     } 
-    if (voidActivated) {
+    if (currentEffects[1]) {
         var fileFlagAscii = config.KNIGHT;
     }
     let themed = hyfetch({distroAscii: fileFlagAscii, flagColours: fileFlagColours});
@@ -245,20 +245,20 @@ function commandHyfetch(){
 }
 
 function pride(){
-    if (voidActivated){
+    if (currentEffects[1]){
         var fileFlagAscii = config.KNIGHT;
     }
     hyfetch({distroAscii: fileFlagAscii, flagColours:['#9b4b4b','#ac8453','#aca653','#2b5a37','#536eac','#55305a']});
-    prideActivated = true;
+    currentEffects[0] = true;
     terminalOutput("Happy Pride!");
 }
 
 function commandVoid(){
-    if (prideActivated){
+    if (currentEffects[0]){
         var fileFlagColours = config.COLOURS;
     }
-    hyfetch({distroAscii: knight, flagColours: fileFlagColours})
-    voidActivated = true;
+    hyfetch({distroAscii: config.KNIGHT, flagColours: fileFlagColours})
+    currentEffects[1] = true;
     terminalOutput("No voice to cry suffering.");
 
 }

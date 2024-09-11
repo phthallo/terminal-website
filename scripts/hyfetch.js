@@ -1,24 +1,5 @@
 import { renderFact } from "./index.js"
-let distro = `
-          _,met$$$$$gg.
-       ,g$$$$$$$$$$$$$$$P.
-     ,g$$P"        "\""Y$$.".
-    ,$$P'              \`$$$.
-   ',$$P       ,ggs.     \`$$b:
-   \`d$$'     ,$P"'   .    $$$
-    $$P      d$'     ,    $$P
-    $$:      $$.   -    ,d$$'
-    $$;      Y$b._   _,d$P'
-    Y$$.    \`.\`"Y$$$$P"'
-    \`$$b      "-.__
-     \`Y$$
-      \`Y$$.
-        \`$$b.
-          \`Y$$b.
-             \`"Y$b._
-                 \`"\""
-`
-
+import * as config from "./config.js"
 
 let specs = ` 
 <b>phthallo</b>@<b>hackclub.app</b>
@@ -45,18 +26,18 @@ let specs = `
 --><span class = "palette blue">&nbsp;&nbsp;&nbsp;</span><!---
 --><span class = "palette lightblue">&nbsp;&nbsp;&nbsp;</span>`
 
-export function hyfetch({distroAscii=distro, flagColours=["#915346", "#c8a58d", "#FFFFFF", "#ad8a9f", "#6e3557"], initial=false,  replace=true} = {}){
+export function hyfetch({distroAscii=config.DISTRO, flagColours=config.COLOURSDEFAULT, initial=false,  replace=true} = {}){
     let colouredLines = []
     let lines = distroAscii.split("\n"); // .length = the amount of lines the distroAscii is
-    let lengthofEach = Math.floor(lines.length/flagColours.length);
-    for (let i = 0; i < flagColours.length; i++){
-            for (const j in (lines.slice(lengthofEach*(i-1), i*lengthofEach))){
-                let nextLine = (lines.slice(lengthofEach*(i-1), i*lengthofEach)[j]);
-                colouredLines.push(`<pre style = "color: ${flagColours[i-1]}">${nextLine}</pre>`);
+    let lengthofEach = Math.floor(lines.length/flagColours.length); // lines that each colour should take up
+    for (let i = 1; i < flagColours.length; i++){ 
+            for (const j in (lines.slice(lengthofEach*(i-1), i*lengthofEach))){ // for each segment of lines (segments contain lengthofEach no. lines) 
+                let nextLine = (lines.slice(lengthofEach*(i-1), i*lengthofEach)[j]); // for each line in that segment
+                colouredLines.push(`<pre style = "color: ${flagColours[i-1]}">${nextLine}</pre>`); // colour and push
             }
         }
-    let difference  = lines.length - (lengthofEach*flagColours.length);
-    for (let i = (difference+2); i >= 0; i--){
+    let difference  = lines.length - (lengthofEach*flagColours.length); // sometimes length of the colours provided means it doesn't divide nicely
+    for (let i = (difference+lengthofEach-1); i >= 0; i--){ // append the remainder onto the end so that the last colour has more
         colouredLines.push(`<pre style = "color: ${flagColours[flagColours.length-1]}">${lines[lines.length-1-i]}</pre>`);
     }
     if (initial){
