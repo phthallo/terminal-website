@@ -9,7 +9,7 @@ var currentEffects = [false, false]
 const COMMANDS = {
     "ls": {
         "type": "function",
-        "action": "ls",
+        "action": ls,
         "help": "Lists all files in the current working directory"
         },
     "sudo": {
