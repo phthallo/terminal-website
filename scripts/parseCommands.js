@@ -180,11 +180,12 @@ function cd(path){
 function cat(file){
     let localcwd = cwd + file.substring(0, file.lastIndexOf('/')); 
     let localfile = file.substring(file.lastIndexOf('/')+1);
-    if (config.FILES[localcwd] === undefined){
+    let status = [config.FILES[localcwd].includes(localfile), config.SUBFOLDERS[localcwd].includes(file)]
+    if (status.every(item => !item)){
         terminalOutput(`cat: ${file}: No such file or directory`)
-    } else if (config.SUBFOLDERS[localcwd].includes(file)){
+    } else if (status[1]){
         terminalOutput(`cat: ${file}: Is a directory`)
-    } else if (config.FILES[localcwd].includes(localfile)){
+    } else if (status[0]){
         fetch(`files/${localcwd}/${localfile}`)
         .then((res => res.text()))
         .then((text) => {
