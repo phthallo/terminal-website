@@ -48,6 +48,9 @@ hr {
 
 /* || ELEMENT STYLES */
 
+.ifra {
+  width: 100%;
+}
 
 #initial {
   .specs {

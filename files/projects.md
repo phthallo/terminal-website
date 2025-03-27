@@ -1,4 +1,7 @@
 <hr></hr>
+<div>this is quite out-of-date - check out my github for more</div>
+<hr></hr>
+
 <div class = "project-wrapper">
     <div class= "project-title">
         <a href = "https://github.com/phthallo/pyflagoras">pyflagoras</a>
